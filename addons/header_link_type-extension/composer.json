@@ -1,0 +1,9 @@
+{
+    "name": "pyro/header_link_type-extension",
+    "type": "streams-addon",
+    "autoload": {
+        "psr-4": {
+            "Pyro\\HeaderLinkTypeExtension\\": "src/"
+        }
+    }
+}

@@ -1,0 +1,95 @@
+{% extends template.layout ?: "theme::layouts/default" %}
+
+{% block content %}
+    <py-menu-editor compact>
+        <template slot="tree">
+            {{ tree|raw }}
+        </template>
+        {#
+        <template slot="type_list">
+            {% for menu_type in menu_types %}
+            <p-menu-editor-type-list-item
+                    namespace="{{ trans(menu_type.namespace) }}"
+                    title="{{ trans(menu_type.title) }}"
+                    description="{{ trans(menu_type.description) }}"
+            ></p-menu-editor-type-list-item>
+            {% endfor %}
+        </template>
+        #}
+    </py-menu-editor>
+{% endblock %}
+
+{#
+{% block buttons %}{% endblock %}
+
+{% block metadata  %}
+    {{ asset_add("menus.css", "crvs.module.menus::css/menus.css", ['webpack:menus:styles']) }}
+    {{ asset_add("menus.js", "crvs.module.menus::js/menus.js", ['webpack:menus:scripts']) }}
+    {{ parent() }}
+{% endblock %}
+
+{% block metadata_end %}
+    {{ parent() }}
+    {{ asset_style("menus.css") }}
+{% endblock %}
+
+{% block assets %}
+    {{ parent() }}
+    {{ asset_script("menus.js") }}
+{% endblock %}
+
+
+
+{% block body_start %}
+    {{ parent() }}
+    <template id="menus-admin-link-type-template">
+        {% if not menu_types.isEmpty() %}
+            <ul class="nav nav-pills nav-stacked">
+                {% for menu_type in menu_types %}
+                    <li class="nav-item">
+                        <a
+                            href="javascript: void(0);"
+                            data-link-type="{{ menu_type.namespace }}"
+                            class="nav-link link-type-option"
+                        >
+                            <strong>{{ trans(menu_type.object.title) }}</strong>
+                            <br>
+                            <small>{{ trans(menu_type.object.description) }}</small>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </template>
+{% endblock %}
+
+//content
+
+{% block init_script %}
+    <script>
+
+        $(function () {
+            let adminMenus = new crvs.menus.PyroAdminMenus('#pyro-admin-menus',{
+                class           : 'menus-admin-ui',
+                menuSlug        : '{{ menu }}',
+                fetchTreeUrl    : '{{ url_to('admin/menus/links/' ~ menu ~ '/tree') }}',
+                createFormUrl   : '{{ url_to('admin/menus/links/' ~ menu ~ '/form') }}',
+                editFormUrl     : '{{ url_to('admin/menus/links/' ~ menu ~ '/edit') }}',
+                linkTypeTemplate: 'menus-admin-link-type-template'
+            })
+            adminMenus.showLinkTypes();
+            adminMenus.showTree().then(function(){
+                adminMenus.showLinkTypes();
+            });
+        });
+    </script>
+
+    {{ parent() }}
+
+{% endblock %}
+
+
+{% block end %}
+    {{ dump(linkTypes) }}
+{% endblock %}
+#}

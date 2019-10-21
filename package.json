@@ -1,0 +1,18 @@
+{
+    "name": "@pyro/menus",
+    "version": "1.0.0",
+    "scripts": {},
+    "main": "resources/js/addon.js",
+    "pyro": {
+        "srcPath": "lib",
+        "entry": {
+            "development": "index.ts",
+            "production": "index.ts"
+        }
+    },
+    "dependencies": {
+        "@pyro/platform": "^1.0.0"
+    },
+    "devDependencies": {
+    }
+}

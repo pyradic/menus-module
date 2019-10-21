@@ -1,0 +1,16 @@
+{% import options.get('macro', 'pyro.module.menus::pyro_admin_macro') as macro %}
+
+<{{ options.list_tag ?: 'ul' }} class="{{ options.list_class }}" {{ html_attributes(options.get('list_attributes', [])) }}>
+<c-menu
+horizontal
+submenu-type="dropdown"
+submenu-tag="div"
+submenu-trigger="hover"
+item-tag="div"
+tag="div"
+    >
+    {{ macro.links(options.parent ? options.parent.children : links.top(), links, options, 1) }}
+</c-menu>
+{#<{{ options.list_tag ?: 'ul' }} class="{{ options.list_class }}" {{ html_attributes(options.get('list_attributes', [])) }}>#}
+{#    {{ macro.links(options.parent ? options.parent.children : links.top(), links, options, 1) }}#}
+{#</{{ options.list_tag ?: 'ul' }}>#}

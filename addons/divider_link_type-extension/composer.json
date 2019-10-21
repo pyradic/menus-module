@@ -1,0 +1,9 @@
+{
+    "name": "pyro/divider_link_type-extension",
+    "type": "streams-addon",
+    "autoload": {
+        "psr-4": {
+            "Pyro\\DividerLinkTypeExtension\\": "src/"
+        }
+    }
+}

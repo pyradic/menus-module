@@ -1,0 +1,25 @@
+{
+    "name": "pyro/menus-module",
+    "type": "streams-addon",
+    "description": "",
+    "autoload": {
+        "psr-4": {
+            "Pyro\\MenusModule\\": "src/",
+            "Pyro\\DividerLinkTypeExtension\\": "addons/divider_link_type-extension/src",
+            "Pyro\\HeaderLinkTypeExtension\\": "addons/header_link_type-extension/src",
+            "Pyro\\LabelLinkTypeExtension\\": "addons/label_link_type-extension/src",
+            "Pyro\\ModuleLinkTypeExtension\\": "addons/module_link_type-extension/src",
+            "Pyro\\UrlLinkTypeExtension\\": "addons/url_link_type-extension/src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Pyro\\MenusModule\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.1.x-dev"
+        }
+    }
+}

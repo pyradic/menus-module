@@ -1,0 +1,9 @@
+{
+    "name": "pyro/module_link_type-extension",
+    "type": "streams-addon",
+    "autoload": {
+        "psr-4": {
+            "Pyro\\ModuleLinkTypeExtension\\": "src/"
+        }
+    }
+}
