@@ -49,7 +49,7 @@ class MenusModulePlugin extends Plugin
                         }
                     ))
                         ->setModel(MenuModel::class)
-                        ->setCachePrefix('pyro.module.menus::menu.render');
+                        ->setCachePrefix('pyro.module.menus::menu.render:' . $menu);
 
                     return $menu;
                 },

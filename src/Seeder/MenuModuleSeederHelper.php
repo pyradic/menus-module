@@ -1,17 +1,17 @@
 <?php
 
-namespace Pyro\MenusModule;
+namespace Pyro\MenusModule\Seeder;
 
 use Anomaly\Streams\Platform\Entry\EntryRepository;
 use Anomaly\Streams\Platform\Traits\FiresCallbacks;
 use Pyro\DividerLinkTypeExtension\DividerLinkTypeModel;
 use Pyro\HeaderLinkTypeExtension\HeaderLinkTypeModel;
 use Pyro\LabelLinkTypeExtension\LabelLinkTypeModel;
-use Pyro\ModuleLinkTypeExtension\ModuleLinkTypeModel;
-use Pyro\UrlLinkTypeExtension\UrlLinkTypeModel;
 use Pyro\MenusModule\Link\Contract\LinkRepositoryInterface;
 use Pyro\MenusModule\Menu\Contract\MenuInterface;
 use Pyro\MenusModule\Menu\Contract\MenuRepositoryInterface;
+use Pyro\ModuleLinkTypeExtension\ModuleLinkTypeModel;
+use Pyro\UrlLinkTypeExtension\UrlLinkTypeModel;
 
 class MenuModuleSeederHelper
 {

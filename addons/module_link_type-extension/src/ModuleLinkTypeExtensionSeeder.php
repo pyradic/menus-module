@@ -3,8 +3,8 @@
 namespace Pyro\ModuleLinkTypeExtension;
 
 use Anomaly\Streams\Platform\Database\Seeder\Seeder;
+use Pyro\MenusModule\Seeder\MenuModuleSeederHelper;
 use Pyro\UrlLinkTypeExtension\UrlLinkTypeModel;
-use Pyro\MenusModule\MenuModuleSeederHelper;
 
 class ModuleLinkTypeExtensionSeeder extends Seeder
 {

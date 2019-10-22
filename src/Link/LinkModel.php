@@ -58,6 +58,7 @@ use Pyro\MenusModule\Type\Contract\LinkTypeInterface;
  * @property int|null $allowed_roles_count
  * @property int|null $children_count
  * @property int|null $versions_count
+ * @property string|null $icon
  */
 class LinkModel extends MenusLinksEntryModel implements LinkInterface
 {

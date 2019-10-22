@@ -13,6 +13,7 @@ use Pyro\MenusModule\Link\LinkRepository;
 use Pyro\MenusModule\Menu\Contract\MenuRepositoryInterface;
 use Pyro\MenusModule\Menu\MenuModel;
 use Pyro\MenusModule\Menu\MenuRepository;
+use Pyro\MenusModule\Seeder\AdminMenuSeeder;
 
 /**
  * Class MenusModuleServiceProvider
@@ -70,6 +71,8 @@ class MenusModuleServiceProvider extends AddonServiceProvider
                 true
             ));
         }
+
+        AdminMenuSeeder::registerSeed();
     }
 
     public function boot()
