@@ -3,13 +3,16 @@
 use Anomaly\Streams\Platform\Addon\AddonCollection;
 use Anomaly\Streams\Platform\Addon\AddonIntegrator;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
-use Anomaly\Streams\Platform\Entry\EntryModel;
 use Anomaly\Streams\Platform\Model\Menus\MenusLinksEntryModel;
 use Anomaly\Streams\Platform\Model\Menus\MenusMenusEntryModel;
+use Anomaly\Streams\Platform\View\Event\TemplateDataIsLoading;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Str;
 use Pyro\MenusModule\Link\Contract\LinkRepositoryInterface;
 use Pyro\MenusModule\Link\LinkModel;
 use Pyro\MenusModule\Link\LinkRepository;
+use Pyro\MenusModule\Menu\Command\BuildMenuNode;
+use Pyro\MenusModule\Menu\Contract\MenuInterface;
 use Pyro\MenusModule\Menu\Contract\MenuRepositoryInterface;
 use Pyro\MenusModule\Menu\MenuModel;
 use Pyro\MenusModule\Menu\MenuRepository;
@@ -73,6 +76,37 @@ class MenusModuleServiceProvider extends AddonServiceProvider
         }
 
         AdminMenuSeeder::registerSeed();
+
+        $this->app->events->listen(TemplateDataIsLoading::class, function (TemplateDataIsLoading $event) {
+            $template = $event->getTemplate();
+            /** @var \Anomaly\Streams\Platform\Ui\ControlPanel\ControlPanel $cp */
+            $cp = $template->get('cp');
+            /** @var \Anomaly\Streams\Platform\Addon\Module\Module|\Anomaly\Streams\Platform\Addon\Module\ModulePresenter $module */
+            $module = $template->get('module');
+            /** @var \Pyro\Platform\Addon\Theme\Theme $theme */
+            $theme = $template->get('theme');
+            if ($theme->getNamespace() === 'pyro.theme.admin') {
+                $repo = $this->app->make(MenuRepositoryInterface::class);
+                /** @var \Illuminate\Support\Collection|\Pyro\MenusModule\Menu\MenuNode[] $nodes */
+//                $nodes = $menus->all();
+                $menus = $repo->newQuery()->where('slug', 'like', 'admin_%')->get();
+                return;
+
+$nodes                ->filter(function (MenuInterface $menu) {
+                        return Str::startsWith($menu->getSlug(), 'admin_');
+                    })
+                    ->map(function (MenuInterface $menu) {
+                        /** @var \Pyro\MenusModule\Menu\MenuNode $node */
+                        $node = $this->dispatchNow(new BuildMenuNode($menu->toTree()));
+                        return $node;
+                    });
+
+                $data  = $this->app->platform->getData();
+                foreach ($nodes->map->toArray()->keyBy('slug') as $slug => $menu) {
+                    $data->set('menus.' . $slug, $menu);
+                }
+            }
+        });
     }
 
     public function boot()

@@ -18,7 +18,7 @@ use Pyro\MenusModule\Menu\Contract\MenuRepositoryInterface;
  * @method \Pyro\MenusModule\Menu\Contract\MenuInterface create(array $attributes)
  * @method \Pyro\MenusModule\Menu\Contract\MenuInterface getModel()
  * @method \Pyro\MenusModule\Menu\Contract\MenuInterface newInstance(array $attributes = [])
- * @method \Anomaly\Streams\Platform\Entry\EntryCollection|\Pyro\MenusModule\Menu\Contract\MenuInterface[] all(array $ids)
+ * @method \Anomaly\Streams\Platform\Entry\EntryCollection|\Pyro\MenusModule\Menu\Contract\MenuInterface[] all()
  * @method \Anomaly\Streams\Platform\Entry\EntryCollection|\Pyro\MenusModule\Menu\Contract\MenuInterface[] allWithTrashed(array $ids)
  * @method \Anomaly\Streams\Platform\Entry\EntryCollection|\Pyro\MenusModule\Menu\Contract\MenuInterface[] allWithoutRelations(array $ids)
  */

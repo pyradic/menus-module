@@ -8,7 +8,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Pyro\MenusModule\Link\Command\GetLinks;
 use Pyro\MenusModule\Link\LinkCollection;
 use Pyro\MenusModule\Menu\MenuNode;
-use Pyro\Platform\TreeNode\NodeInterface;
+use Pyro\Platform\Ui\TreeNode\NodeInterface;
 
 class BuildMenuNode
 {
@@ -26,8 +26,10 @@ class BuildMenuNode
 
     public function handle(Collection $options)
     {
+
         $this->links = $this->dispatchNow(new GetLinks($options, $this->menuNode->getModel()));
         $this->recurse($this->links->top(), $this->menuNode);
+        return $this->menuNode;
     }
 
     protected function recurse($links, ?NodeInterface $parent = null)

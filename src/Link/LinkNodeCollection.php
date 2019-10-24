@@ -2,7 +2,8 @@
 
 namespace Pyro\MenusModule\Link;
 
-use Pyro\Platform\TreeNode\NodeCollection;
+
+use Pyro\Platform\Ui\TreeNode\NodeCollection;
 
 class LinkNodeCollection extends NodeCollection
 {
