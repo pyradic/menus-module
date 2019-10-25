@@ -87,21 +87,18 @@ class MenusModuleServiceProvider extends AddonServiceProvider
             $theme = $template->get('theme');
             if ($theme->getNamespace() === 'pyro.theme.admin') {
                 $repo = $this->app->make(MenuRepositoryInterface::class);
-                /** @var \Illuminate\Support\Collection|\Pyro\MenusModule\Menu\MenuNode[] $nodes */
-//                $nodes = $menus->all();
                 $menus = $repo->newQuery()->where('slug', 'like', 'admin_%')->get();
-                return;
-
-$nodes                ->filter(function (MenuInterface $menu) {
-                        return Str::startsWith($menu->getSlug(), 'admin_');
-                    })
+                /** @var \Illuminate\Support\Collection|\Pyro\MenusModule\Menu\MenuNode[] $nodes */
+                $nodes = $menus->filter(function (MenuInterface $menu) {
+                    return Str::startsWith($menu->getSlug(), 'admin_');
+                })
                     ->map(function (MenuInterface $menu) {
                         /** @var \Pyro\MenusModule\Menu\MenuNode $node */
                         $node = $this->dispatchNow(new BuildMenuNode($menu->toTree()));
                         return $node;
                     });
 
-                $data  = $this->app->platform->getData();
+                $data = $this->app->platform->getData();
                 foreach ($nodes->map->toArray()->keyBy('slug') as $slug => $menu) {
                     $data->set('menus.' . $slug, $menu);
                 }
