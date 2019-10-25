@@ -2,6 +2,9 @@
     "name": "pyro/menus-module",
     "type": "streams-addon",
     "description": "",
+    "require": {
+        "ssnepenthe/color-utils": "~0.4"
+    },
     "autoload": {
         "psr-4": {
             "Pyro\\MenusModule\\": "src/",

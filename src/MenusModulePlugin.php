@@ -5,6 +5,7 @@ use Anomaly\Streams\Platform\Support\Collection;
 use Anomaly\Streams\Platform\Support\Decorator;
 use Pyro\MenusModule\Link\Command\GetLinks;
 use Pyro\MenusModule\Link\Command\RenderMenus;
+use Pyro\MenusModule\Link\Command\RenderMenusJson;
 use Pyro\MenusModule\Menu\Command\BuildMenuNode;
 use Pyro\MenusModule\Menu\Contract\MenuRepositoryInterface;
 use Pyro\MenusModule\Menu\MenuModel;
@@ -36,13 +37,35 @@ class MenusModulePlugin extends Plugin
                     return $tree;
                 },
                 [
-                    'is_safe' => ['html'],
+                    'is_safe' => [ 'html' ],
+                ]
+            ),
+            new \Twig_SimpleFunction(
+                'menu_json',
+                function ($menu = null) {
+                    $rendered = dispatch_now(new RenderMenusJson(Collection::make(compact('menu'))));
+                    return $rendered;
+                    $menu = (new MenusModuleCriteria(
+                        'render',
+                        function (Collection $options) use ($menu) {
+                            return $this->dispatch(new RenderMenusJson($options->put('menu', $menu)));
+                        }
+                    ))
+                        ->setModel(MenuModel::class)
+                        ->setCacheTtl()
+//                        ->setCachePrefix('pyro.module.menus::menu.render.json:' . $menu)
+;
+
+                    return $menu;
+                },
+                [
+                    'is_safe' => [ 'html' ],
                 ]
             ),
             new \Twig_SimpleFunction(
                 'menu',
                 function ($menu = null) {
-                    $menu =  (new MenusModuleCriteria(
+                    $menu = (new MenusModuleCriteria(
                         'render',
                         function (Collection $options) use ($menu) {
                             return $this->dispatch(new RenderMenus($options->put('menu', $menu)));
@@ -54,7 +77,7 @@ class MenusModulePlugin extends Plugin
                     return $menu;
                 },
                 [
-                    'is_safe' => ['html'],
+                    'is_safe' => [ 'html' ],
                 ]
             ),
             new \Twig_SimpleFunction(

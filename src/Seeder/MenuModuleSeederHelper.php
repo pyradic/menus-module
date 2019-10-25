@@ -11,11 +11,11 @@ use Pyro\MenusModule\Link\Contract\LinkRepositoryInterface;
 use Pyro\MenusModule\Menu\Contract\MenuInterface;
 use Pyro\MenusModule\Menu\Contract\MenuRepositoryInterface;
 use Pyro\ModuleLinkTypeExtension\ModuleLinkTypeModel;
+use Pyro\Platform\Database\SeederHelper;
 use Pyro\UrlLinkTypeExtension\UrlLinkTypeModel;
 
-class MenuModuleSeederHelper
+class MenuModuleSeederHelper extends SeederHelper
 {
-    use FiresCallbacks;
     /** @var \Pyro\MenusModule\Menu\MenuModel */
     protected $menu;
 
@@ -38,7 +38,7 @@ class MenuModuleSeederHelper
             }
             if ($menu === null) {
                 $menu = $repo->create([
-                    'en'   => [
+                    $this->locale()   => [
                         'name'        => $val,
                         'description' => $val,
                     ],
@@ -77,7 +77,7 @@ class MenuModuleSeederHelper
     {
         $links = resolve(LinkRepositoryInterface::class);
         if ($title !== null) {
-            $entryData = array_replace([ 'en' => [ 'title' => $title, ], ], $entryData);
+            $entryData = array_replace([ $this->locale() => [ 'title' => $title, ], ], $entryData);
         }
         $entry = $this->repo->create($entryData);
 
