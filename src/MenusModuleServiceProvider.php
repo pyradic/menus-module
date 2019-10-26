@@ -61,6 +61,7 @@ class MenusModuleServiceProvider extends AddonServiceProvider
         //        'admin/menus/links/{menu?}'                 => 'Pyro\MenusModule\Http\Controller\Admin\LinksController@index',
         //        'admin/menus/links/{menu}/edit/{id}'        => 'Pyro\MenusModule\Http\Controller\Admin\LinksController@edit',
 
+
     ];
 
     public function register(AddonIntegrator $integrator, AddonCollection $addons)
