@@ -1,5 +1,5 @@
 {
-    "name": "@pyro/menus",
+    "name": "@pyro/menus-module",
     "version": "1.0.0",
     "scripts": {},
     "main": "resources/js/addon.js",

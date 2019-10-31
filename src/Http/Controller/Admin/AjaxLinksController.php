@@ -325,9 +325,9 @@ class AjaxLinksController extends AdminController
         ];
 
         $platform = app()->platform
-            ->addPublicScript('assets/js/pyro__menus.js')
-            ->addPublicStyle('assets/css/pyro__menus.css')
-            ->addProvider('pyro.pyro__menus.MenusServiceProvider')
+            ->addScript('@pyro/menus-module')
+            ->addStyle('@pyro/menus-module')
+            ->addProvider('@pyro/menus-module::MenusModuleServiceProvider')
             ->set('pyro.menus', compact('types', 'menuSlug', 'urls'));
     }
 }

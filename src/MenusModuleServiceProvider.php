@@ -17,6 +17,7 @@ use Pyro\MenusModule\Menu\Contract\MenuRepositoryInterface;
 use Pyro\MenusModule\Menu\MenuModel;
 use Pyro\MenusModule\Menu\MenuRepository;
 use Pyro\MenusModule\Seeder\AdminMenuSeeder;
+use Pyro\Platform\Platform;
 
 /**
  * Class MenusModuleServiceProvider
@@ -61,10 +62,9 @@ class MenusModuleServiceProvider extends AddonServiceProvider
         //        'admin/menus/links/{menu?}'                 => 'Pyro\MenusModule\Http\Controller\Admin\LinksController@index',
         //        'admin/menus/links/{menu}/edit/{id}'        => 'Pyro\MenusModule\Http\Controller\Admin\LinksController@edit',
 
-
     ];
 
-    public function register(AddonIntegrator $integrator, AddonCollection $addons)
+    public function register(AddonIntegrator $integrator, AddonCollection $addons, Platform $platform)
     {
         $names = [ 'divider', 'header', 'label', 'module', 'url' ];
         foreach ($names as $name) {
@@ -78,6 +78,14 @@ class MenusModuleServiceProvider extends AddonServiceProvider
 
         AdminMenuSeeder::registerSeed();
 
+        $platform
+//            ->addAddon($this->addon)
+            ->addScript('@pyro/menus-module')
+//            ->addProvider('@pyro/menus-module::MenusModuleServiceProvider')
+            ->addProvider($this->addon);
+
+        $this->app->platform->addAddon($this->addon);
+
         $this->app->events->listen(TemplateDataIsLoading::class, function (TemplateDataIsLoading $event) {
             $template = $event->getTemplate();
             /** @var \Anomaly\Streams\Platform\Ui\ControlPanel\ControlPanel $cp */
@@ -89,8 +97,8 @@ class MenusModuleServiceProvider extends AddonServiceProvider
             if ($theme->getNamespace() === 'pyro.theme.admin') {
                 $repo = $this->app->make(MenuRepositoryInterface::class);
 
-return;
-$menus = $repo->newQuery()->where('slug', 'like', 'admin_%')->get();
+                return;
+                $menus = $repo->newQuery()->where('slug', 'like', 'admin_%')->get();
                 /** @var \Illuminate\Support\Collection|\Pyro\MenusModule\Menu\MenuNode[] $nodes */
                 $nodes = $menus->filter(function (MenuInterface $menu) {
                     return Str::startsWith($menu->getSlug(), 'admin_');

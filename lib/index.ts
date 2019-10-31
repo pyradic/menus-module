@@ -1,10 +1,10 @@
 import './menus.scss'
 import './vendor/jquery.blockUI'
-import { MenusServiceProvider } from './MenusServiceProvider';
+import { MenusModuleServiceProvider } from './MenusModuleServiceProvider';
 import MenusVuePlugin from './MenusVuePlugin';
 
 export {
-    MenusServiceProvider,
+    MenusModuleServiceProvider,
     MenusVuePlugin
 }
 
