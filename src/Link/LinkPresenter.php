@@ -5,11 +5,8 @@ use Anomaly\Streams\Platform\Support\Decorator;
 use Pyro\MenusModule\Link\Contract\LinkInterface;
 
 /**
- * Class LinkPresenter
+ * \Pyro\MenusModule\Link\LinkPresenter
  *
- * @link http://pyrocms.com/
- * @author PyroCMS, Inc. <support@pyrocms.com>
- * @author Ryan Thompson <ryan@pyrocms.com>
  * @mixin \Pyro\MenusModule\Link\LinkModel
  */
 class LinkPresenter extends EntryPresenter

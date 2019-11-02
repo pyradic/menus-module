@@ -7,11 +7,8 @@ use Pyro\MenusModule\Menu\Contract\MenuInterface;
 use Pyro\MenusModule\Type\LinkTypeExtension;
 
 /**
- * Interface LinkInterface
+ * \Pyro\MenusModule\Link\Contract\LinkInterface
  *
- * @link http://pyrocms.com/
- * @author PyroCMS, Inc. <support@pyrocms.com>
- * @author Ryan Thompson <ryan@pyrocms.com>
  * @mixin \Pyro\MenusModule\Link\LinkModel
  */
 interface LinkInterface extends EntryInterface

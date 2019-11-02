@@ -5,22 +5,24 @@ use Pyro\MenusModule\Link\Contract\LinkRepositoryInterface;
 use Pyro\MenusModule\Menu\Contract\MenuInterface;
 
 /**
- * Class LinkRepository
+ * \Pyro\MenusModule\Link\LinkRepository
  *
- * @link http://pyrocms.com/
- * @author PyroCMS, Inc. <support@pyrocms.com>
- * @author Ryan Thompson <ryan@pyrocms.com>
- * @method \Pyro\MenusModule\Link\Contract\LinkInterface first($direction = 'asc')
- * @method \Pyro\MenusModule\Link\Contract\LinkInterface find($id)
- * @method \Pyro\MenusModule\Link\Contract\LinkInterface findBy($key, $value)
- * @method \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\Contract\LinkInterface[] findAllBy($key, $value)
- * @method \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\Contract\LinkInterface[] findAll(array $ids)
- * @method \Pyro\MenusModule\Link\Contract\LinkInterface create(array $attributes)
- * @method \Pyro\MenusModule\Link\Contract\LinkInterface getModel()
- * @method \Pyro\MenusModule\Link\Contract\LinkInterface newInstance(array $attributes = [])
- * @method \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\Contract\LinkInterface[] all(array $ids)
+ * @method \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\Contract\LinkInterface[] all()
  * @method \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\Contract\LinkInterface[] allWithTrashed(array $ids)
  * @method \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\Contract\LinkInterface[] allWithoutRelations(array $ids)
+ * @method \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\Contract\LinkInterface[] findAll(array $ids)
+ * @method \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\Contract\LinkInterface[] findAllBy(string $key, $value)
+ * @method \Pyro\MenusModule\Link\Contract\LinkInterface first($direction = "asc")
+ * @method \Pyro\MenusModule\Link\Contract\LinkInterface find($id)
+ * @method \Pyro\MenusModule\Link\Contract\LinkInterface findBy($key, $value)
+ * @method \Pyro\MenusModule\Link\Contract\LinkInterface create(array $attributes = [])
+ * @method \Pyro\MenusModule\Link\Contract\LinkInterface getModel()
+ * @method \Pyro\MenusModule\Link\Contract\LinkInterface newInstance(array $attributes = [])
+ * @method \Pyro\MenusModule\Link\Contract\LinkInterface findWithoutRelations($id)
+ * @method \Pyro\MenusModule\Link\Contract\LinkInterface findTrashed($id)
+ * @method \Anomaly\Streams\Platform\Entry\EntryQueryBuilder newQuery()
+ * @method \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\Contract\LinkInterface[] sorted($direction = "asc")
+ * @method \Pyro\MenusModule\Link\Contract\LinkInterface lastModified()
  */
 class LinkRepository extends EntryRepository implements LinkRepositoryInterface
 {

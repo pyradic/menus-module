@@ -6,11 +6,8 @@ use Anomaly\Streams\Platform\Http\Command\ClearHttpCache;
 use Pyro\MenusModule\Link\Contract\LinkInterface;
 
 /**
- * Class LinkObserver
+ * \Pyro\MenusModule\Link\LinkObserver
  *
- * @link http://pyrocms.com/
- * @author PyroCMS, Inc. <support@pyrocms.com>
- * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class LinkObserver extends EntryObserver
 {

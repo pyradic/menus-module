@@ -5,11 +5,8 @@ use Pyro\MenusModule\Link\LinkCollection;
 use Pyro\MenusModule\Menu\Contract\MenuInterface;
 
 /**
- * Interface LinkRepositoryInterface
+ * \Pyro\MenusModule\Link\Contract\LinkRepositoryInterface
  *
- * @link http://pyrocms.com/
- * @author PyroCMS, Inc. <support@pyrocms.com>
- * @author Ryan Thompson <ryan@pyrocms.com>
  * @mixin \Pyro\MenusModule\Link\LinkRepository
  */
 interface LinkRepositoryInterface extends EntryRepositoryInterface

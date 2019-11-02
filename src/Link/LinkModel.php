@@ -8,31 +8,39 @@ use Pyro\MenusModule\Menu\Contract\MenuInterface;
 use Pyro\MenusModule\Type\Contract\LinkTypeInterface;
 
 /**
- * Pyro\MenusModule\Link\LinkModel
+ * \Pyro\MenusModule\Link\LinkModel
  *
- * @property int                                                                                                  $id
- * @property int|null                                                                                             $sort_order
- * @property \Illuminate\Support\Carbon                                                                           $created_at
- * @property int|null                                                                                             $created_by_id
- * @property \Illuminate\Support\Carbon|null                                                                      $updated_at
- * @property int|null                                                                                             $updated_by_id
- * @property \Illuminate\Support\Carbon|null                                                                      $deleted_at
- * @property int                                                                                                  $menu_id
- * @property string                                                                                               $type
- * @property int                                                                                                  $entry_id
- * @property string                                                                                               $entry_type
- * @property string                                                                                               $target
- * @property string|null                                                                                          $class
- * @property int|null                                                                                             $parent_id
- * @property \Anomaly\UsersModule\Role\RoleCollection|\Anomaly\UsersModule\Role\RoleModel[]                       $allowedRoles
- * @property \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\LinkModel[]                             $children
- * @property \Anomaly\UsersModule\User\UserModel|null                                                             $createdBy
- * @property \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\LinkModel[]                             $entry
- * @property mixed|null                                                                                           $raw
- * @property \Anomaly\Streams\Platform\Entry\EntryCollection|\Pyro\MenusModule\Menu\MenuModel[]                   $menu
- * @property \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\LinkModel[]                             $parent
- * @property \Anomaly\UsersModule\User\UserModel|null                                                             $updatedBy
+ */
+/**
+ * \Pyro\MenusModule\Link\LinkModel
+ *
+ * @property int $id
+ * @property int|null $sort_order
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property int|null $created_by_id
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int|null $updated_by_id
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property int $menu_id
+ * @property string $type
+ * @property int $entry_id
+ * @property string $entry_type
+ * @property string $target
+ * @property string|null $class
+ * @property int|null $parent_id
+ * @property \Anomaly\UsersModule\Role\RoleCollection|\Anomaly\UsersModule\Role\RoleModel[] $allowedRoles
+ * @property int|null $allowed_roles_count
+ * @property \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\LinkModel[] $children
+ * @property int|null $children_count
+ * @property \Anomaly\UsersModule\User\UserModel|null $createdBy
+ * @property mixed|null $raw
+ * @property \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\LinkModel[] $grandchildren
+ * @property int|null $grandchildren_count
+ * @property \Pyro\MenusModule\Menu\MenuModel $menu
+ * @property \Pyro\MenusModule\Link\LinkModel|null $parent
+ * @property \Anomaly\UsersModule\User\UserModel|null $updatedBy
  * @property \Anomaly\Streams\Platform\Version\VersionCollection|\Anomaly\Streams\Platform\Version\VersionModel[] $versions
+ * @property int|null $versions_count
  * @method static \Pyro\MenusModule\Link\LinkModel make($attributes=[])
  * @method static \Anomaly\Streams\Platform\Entry\EntryQueryBuilder|\Pyro\MenusModule\Link\LinkModel newModelQuery()
  * @method static \Anomaly\Streams\Platform\Entry\EntryQueryBuilder|\Pyro\MenusModule\Link\LinkModel newQuery()
@@ -40,25 +48,7 @@ use Pyro\MenusModule\Type\Contract\LinkTypeInterface;
  * @method static \Illuminate\Database\Eloquent\Builder|\Anomaly\Streams\Platform\Entry\EntryModel sorted($direction = 'asc')
  * @method static \Illuminate\Database\Eloquent\Builder|\Anomaly\Streams\Platform\Model\EloquentModel translated()
  * @method static \Illuminate\Database\Eloquent\Builder|\Anomaly\Streams\Platform\Model\EloquentModel translatedIn($locale)
- * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereClass($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereCreatedById($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereEntryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereEntryType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereMenuId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereParentId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereSortOrder($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereTarget($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereUpdatedById($value)
  * @mixin \Eloquent
- * @property int|null $allowed_roles_count
- * @property int|null $children_count
- * @property int|null $versions_count
- * @property string|null $icon
  */
 class LinkModel extends MenusLinksEntryModel implements LinkInterface
 {

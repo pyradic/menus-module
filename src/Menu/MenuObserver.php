@@ -6,11 +6,8 @@ use Anomaly\Streams\Platform\Http\Command\ClearHttpCache;
 use Pyro\MenusModule\Menu\Contract\MenuInterface;
 
 /**
- * Class MenuObserver
+ * \Pyro\MenusModule\Menu\MenuObserver
  *
- * @link http://pyrocms.com/
- * @author PyroCMS, Inc. <support@pyrocms.com>
- * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class MenuObserver extends EntryObserver
 {

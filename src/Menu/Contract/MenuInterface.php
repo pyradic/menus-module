@@ -5,11 +5,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Pyro\MenusModule\Link\LinkCollection;
 
 /**
- * Interface MenuInterface
+ * \Pyro\MenusModule\Menu\Contract\MenuInterface
  *
- * @link http://pyrocms.com/
- * @author PyroCMS, Inc. <support@pyrocms.com>
- * @author Ryan Thompson <ryan@pyrocms.com>
  * @mixin \Pyro\MenusModule\Menu\MenuModel
  */
 interface MenuInterface extends EntryInterface
