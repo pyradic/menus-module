@@ -78,13 +78,9 @@ class MenusModuleServiceProvider extends AddonServiceProvider
 
         AdminMenuSeeder::registerSeed();
 
-        $platform
-//            ->addAddon($this->addon)
-            ->addScript('@pyro/menus-module')
-//            ->addProvider('@pyro/menus-module::MenusModuleServiceProvider')
-            ->addProvider($this->addon);
+        $platform->addWebpackEntry('@pyro/menus-module');
 
-        $this->app->platform->addAddon($this->addon);
+//        $this->app->platform->addAddon($this->addon);
 
         $this->app->events->listen(TemplateDataIsLoading::class, function (TemplateDataIsLoading $event) {
             $template = $event->getTemplate();

@@ -1,14 +1,14 @@
 {
     "name": "@pyro/menus-module",
     "version": "1.0.0",
-    "scripts": {},
-    "main": "resources/js/addon.js",
+    "main": "lib/index.ts",
+    "typings": "lib/index.ts",
+    "types": "lib/index.ts",
     "pyro": {
         "srcPath": "lib",
-        "entry": {
-            "development": "index.ts",
-            "production": "index.ts"
-        }
+        "entrypoints": [
+            {"path": "index.ts", "provider": "MenusModuleServiceProvider"}
+        ]
     },
     "dependencies": {
         "@pyro/platform": "^1.0.0"
