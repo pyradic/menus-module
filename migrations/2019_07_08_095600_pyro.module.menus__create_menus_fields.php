@@ -60,6 +60,12 @@ class PyroModuleMenusCreateMenusFields extends Migration
                 ],
             ],
         ],
+        'icon' => [
+            'type' => 'anomaly.field_type.icon',
+            'config' => [
+                'mode' =>'search'
+            ]
+        ],
         'tooltip' => [
             'type' => 'anomaly.field_type.text',
             'locked' => 0

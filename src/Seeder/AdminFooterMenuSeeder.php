@@ -10,7 +10,7 @@ class AdminFooterMenuSeeder extends \Pyro\Platform\Database\Seeder
     {
         /** @var MenuModuleSeederHelper $helper */
         $helper = $this->helper(MenuModuleSeederHelper::class);
-        $helper->menu('admin_footer')->truncate();
+        $helper->menu('admin_footer', 'Admin Footer', 'De admin footer menu')->truncate();
 
         $items = [
             'Todo'          => [ 'Notitie Maken', 'Agendaoverzicht', 'Algemene afspraak plannen', 'Alle afspraken' ],

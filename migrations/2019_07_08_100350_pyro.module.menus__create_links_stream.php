@@ -38,6 +38,7 @@ class PyroModuleMenusCreateLinksStream extends Migration
         'class',
         'parent',
         'allowed_roles',
+        'icon'
     ];
 
 

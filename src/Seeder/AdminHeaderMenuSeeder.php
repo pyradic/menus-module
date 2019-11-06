@@ -10,7 +10,7 @@ class AdminHeaderMenuSeeder extends \Pyro\Platform\Database\Seeder
     {
         /** @var MenuModuleSeederHelper $helper */
         $helper = $this->helper(MenuModuleSeederHelper::class);
-        $helper->menu('admin_header')->truncate();
+        $helper->menu('admin_header', 'Admin Header', 'De admin header menu')->truncate();
 
         $clients = $helper->label('Clients');
 

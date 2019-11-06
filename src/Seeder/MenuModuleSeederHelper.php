@@ -3,7 +3,6 @@
 namespace Pyro\MenusModule\Seeder;
 
 use Anomaly\Streams\Platform\Entry\EntryRepository;
-use Anomaly\Streams\Platform\Traits\FiresCallbacks;
 use Pyro\DividerLinkTypeExtension\DividerLinkTypeModel;
 use Pyro\HeaderLinkTypeExtension\HeaderLinkTypeModel;
 use Pyro\LabelLinkTypeExtension\LabelLinkTypeModel;
@@ -22,14 +21,15 @@ class MenuModuleSeederHelper extends SeederHelper
     /** @var EntryRepository */
     protected $repo;
 
-
     /**
      * @param MenuInterface|string|int $menu
      */
-    public function menu($val)
+    public function menu($slug, $name = null, $description = null)
     {
-        $menu = $val;
-        $repo = resolve(MenuRepositoryInterface::class);
+        $menu        = $slug;
+        $name        = $name ? $name : $menu;
+        $description = $description ? $description : $name;
+        $repo        = resolve(MenuRepositoryInterface::class);
         if ($menu instanceof MenuInterface === false) {
             if (is_numeric($menu)) {
                 $menu = $repo->find((int)$menu);
@@ -38,11 +38,11 @@ class MenuModuleSeederHelper extends SeederHelper
             }
             if ($menu === null) {
                 $menu = $repo->create([
-                    $this->locale()   => [
-                        'name'        => $val,
-                        'description' => $val,
+                    $this->locale() => [
+                        'name'        => $name,
+                        'description' => $description,
                     ],
-                    'slug' => $val,
+                    'slug'          => $slug,
                 ]);
             }
         }
@@ -97,30 +97,30 @@ class MenuModuleSeederHelper extends SeederHelper
     public function divider($title = null, array $entryData = [], array $linkData = [])
     {
         $this->model(DividerLinkTypeModel::class);
-        return $this->createLink($title, $entryData,$linkData);
+        return $this->createLink($title, $entryData, $linkData);
     }
 
     public function header($title = null, array $entryData = [], array $linkData = [])
     {
         $this->model(HeaderLinkTypeModel::class);
-        return $this->createLink($title, $entryData,$linkData);
+        return $this->createLink($title, $entryData, $linkData);
     }
 
     public function label($title = null, array $entryData = [], array $linkData = [])
     {
         $this->model(LabelLinkTypeModel::class);
-        return $this->createLink($title, $entryData,$linkData);
+        return $this->createLink($title, $entryData, $linkData);
     }
 
     public function module($title = null, array $entryData = [], array $linkData = [])
     {
         $this->model(ModuleLinkTypeModel::class);
-        return $this->createLink($title, $entryData,$linkData);
+        return $this->createLink($title, $entryData, $linkData);
     }
 
     public function url($title = null, array $entryData = [], array $linkData = [])
     {
         $this->model(UrlLinkTypeModel::class);
-        return $this->createLink($title, $entryData,$linkData);
+        return $this->createLink($title, $entryData, $linkData);
     }
 }
