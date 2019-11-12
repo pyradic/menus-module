@@ -49,6 +49,8 @@ use Pyro\MenusModule\Type\Contract\LinkTypeInterface;
  * @method static \Illuminate\Database\Eloquent\Builder|\Anomaly\Streams\Platform\Model\EloquentModel translated()
  * @method static \Illuminate\Database\Eloquent\Builder|\Anomaly\Streams\Platform\Model\EloquentModel translatedIn($locale)
  * @mixin \Eloquent
+ * @property string|null $icon
+ * @property \Pyro\MenusModule\Link\LinkModel $entry
  */
 class LinkModel extends MenusLinksEntryModel implements LinkInterface
 {

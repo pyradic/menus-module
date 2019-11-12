@@ -3,11 +3,12 @@
 namespace Pyro\MenusModule\Ui\Command;
 
 
+use Anomaly\Streams\Platform\Ui\ControlPanel\Component\Button\Command\BuildButtons;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Str;
 use Pyro\MenusModule\Ui\Item;
 use Illuminate\Support\Collection;
 use Pyro\MenusModule\Ui\ItemCollection;
-use Laradic\Support\Concerns\DispatchesJobs;
 use Illuminate\Contracts\Container\Container;
 use Anomaly\Streams\Platform\Support\Authorizer;
 use Anomaly\Streams\Platform\Ui\ControlPanel\ControlPanel;
@@ -98,6 +99,7 @@ class BuildFullControlPanelNavigation
         $this->dispatchNow(new BuildSections($builder));
         $this->dispatchNow(new SetActiveSection($builder));
         $this->dispatchNow(new BuildShortcuts($builder));
+        $this->dispatchNow(new BuildButtons($builder));
 
         $this->activeSection = $builder->getControlPanelActiveSection();
         /** @var \Anomaly\Streams\Platform\Ui\ControlPanel\Component\Navigation\NavigationLink[] $links */

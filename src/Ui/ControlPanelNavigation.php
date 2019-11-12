@@ -2,7 +2,7 @@
 
 namespace Pyro\MenusModule\Ui;
 
-use Laradic\Support\Concerns\DispatchesJobs;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Pyro\MenusModule\Ui\Command\BuildFullControlPanelNavigation;
 
 class ControlPanelNavigation
