@@ -12,7 +12,7 @@ use Pyro\MenusModule\Menu\Contract\MenuInterface;
  *
  */
 /**
- * \Pyro\MenusModule\Menu\MenuModel
+ * Pyro\MenusModule\Menu\MenuModel
  *
  * @property int $id
  * @property int|null $sort_order
@@ -40,6 +40,14 @@ use Pyro\MenusModule\Menu\Contract\MenuInterface;
  * @method static \Illuminate\Database\Eloquent\Builder|\Anomaly\Streams\Platform\Entry\EntryModel sorted($direction = 'asc')
  * @method static \Illuminate\Database\Eloquent\Builder|\Anomaly\Streams\Platform\Model\EloquentModel translated()
  * @method static \Illuminate\Database\Eloquent\Builder|\Anomaly\Streams\Platform\Model\EloquentModel translatedIn($locale)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereCreatedById($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereSortOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereUpdatedById($value)
  * @mixin \Eloquent
  */
 class MenuModel extends MenusMenusEntryModel implements MenuInterface

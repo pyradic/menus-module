@@ -97,8 +97,6 @@ use Pyro\MenusModule\Link\Contract\LinkInterface;
  * @method \Pyro\MenusModule\Link\Contract\LinkInterface firstWhere($key, $operator = NULL, $value = NULL) 
  * @method \Pyro\MenusModule\Link\Contract\LinkInterface first(callable $callback = NULL, $default = NULL) 
  * @method \Pyro\MenusModule\Link\Contract\LinkInterface last(callable $callback = NULL, $default = NULL) 
- * @method \Pyro\MenusModule\Link\Contract\LinkInterface find($key, $default = NULL) 
- * @method \Pyro\MenusModule\Link\Contract\LinkInterface findBy($key, $value) 
  * @method \Pyro\MenusModule\Link\Contract\LinkInterface pull($key, $default = NULL) 
  * @method \Pyro\MenusModule\Link\Contract\LinkInterface shift() 
  * @method \Pyro\MenusModule\Link\Contract\LinkInterface pop() 

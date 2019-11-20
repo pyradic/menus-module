@@ -18,11 +18,10 @@ use Pyro\MenusModule\Menu\Contract\MenuRepositoryInterface;
  * @method \Anomaly\Streams\Platform\Entry\EntryCollection|\Pyro\MenusModule\Menu\Contract\MenuInterface[] findAllBy(string $key, $value) 
  * @method \Pyro\MenusModule\Menu\Contract\MenuInterface findTrashed($id) 
  * @method \Anomaly\Streams\Platform\Entry\EntryQueryBuilder newQuery() 
- * @method \Pyro\MenusModule\Menu\Contract\MenuInterface create(array $attributes = []) 
+ * @method \Pyro\MenusModule\Menu\Contract\MenuInterface create(array $attributes = ['name' => '','slug' => '','description' => '','allowed_roles' => '',]) 
  * @method \Pyro\MenusModule\Menu\MenuModel getModel() 
  * @method \Pyro\MenusModule\Menu\Contract\MenuInterface newInstance(array $attributes = []) 
  * @method \Anomaly\Streams\Platform\Entry\EntryCollection|\Pyro\MenusModule\Menu\Contract\MenuInterface[] sorted($direction = "asc") 
- * @method \Pyro\MenusModule\Menu\Contract\MenuInterface first($direction = "asc") 
  * @method \Pyro\MenusModule\Menu\Contract\MenuInterface lastModified() 
  */
 class MenuRepository extends EntryRepository implements MenuRepositoryInterface

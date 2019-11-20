@@ -12,7 +12,7 @@ use Pyro\MenusModule\Type\Contract\LinkTypeInterface;
  *
  */
 /**
- * \Pyro\MenusModule\Link\LinkModel
+ * Pyro\MenusModule\Link\LinkModel
  *
  * @property int $id
  * @property int|null $sort_order
@@ -28,14 +28,14 @@ use Pyro\MenusModule\Type\Contract\LinkTypeInterface;
  * @property string $target
  * @property string|null $class
  * @property int|null $parent_id
+ * @property string|null $icon
  * @property \Anomaly\UsersModule\Role\RoleCollection|\Anomaly\UsersModule\Role\RoleModel[] $allowedRoles
  * @property int|null $allowed_roles_count
  * @property \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\LinkModel[] $children
  * @property int|null $children_count
  * @property \Anomaly\UsersModule\User\UserModel|null $createdBy
+ * @property \Pyro\MenusModule\Link\LinkModel $entry
  * @property mixed|null $raw
- * @property \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\LinkModel[] $grandchildren
- * @property int|null $grandchildren_count
  * @property \Pyro\MenusModule\Menu\MenuModel $menu
  * @property \Pyro\MenusModule\Link\LinkModel|null $parent
  * @property \Anomaly\UsersModule\User\UserModel|null $updatedBy
@@ -48,9 +48,22 @@ use Pyro\MenusModule\Type\Contract\LinkTypeInterface;
  * @method static \Illuminate\Database\Eloquent\Builder|\Anomaly\Streams\Platform\Entry\EntryModel sorted($direction = 'asc')
  * @method static \Illuminate\Database\Eloquent\Builder|\Anomaly\Streams\Platform\Model\EloquentModel translated()
  * @method static \Illuminate\Database\Eloquent\Builder|\Anomaly\Streams\Platform\Model\EloquentModel translatedIn($locale)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereClass($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereCreatedById($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereEntryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereEntryType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereIcon($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereMenuId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereSortOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereTarget($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereUpdatedById($value)
  * @mixin \Eloquent
- * @property string|null $icon
- * @property \Pyro\MenusModule\Link\LinkModel $entry
  */
 class LinkModel extends MenusLinksEntryModel implements LinkInterface
 {
