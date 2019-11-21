@@ -1,4 +1,4 @@
-import { PyroBuilder } from '@pyro/build-tools';
+import { PyroBuilder } from '@pyro/webpack';
 
 
 export function configure(builder: PyroBuilder) {
