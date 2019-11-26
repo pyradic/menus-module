@@ -2,9 +2,9 @@
 
 use Anomaly\Streams\Platform\Database\Migration\Migration;
 
-class PyroExtensionModuleLinkTypeCreateModulesStream extends Migration
+class PyroExtensionCpActionLinkTypeCreateCpActionStream extends Migration
 {
-    protected $namespace = 'module_link_type';
+    protected $namespace = 'cp_action_link_type';
 
     /**
      * The stream definition.
@@ -12,7 +12,7 @@ class PyroExtensionModuleLinkTypeCreateModulesStream extends Migration
      * @var array
      */
     protected $stream = [
-        'slug'         => 'modules',
+        'slug'         => 'cp_action',
         'title_column' => 'title',
         'translatable' => true,
     ];
@@ -27,7 +27,7 @@ class PyroExtensionModuleLinkTypeCreateModulesStream extends Migration
             'required'     => true,
             'translatable' => true,
         ],
-        'key'         => [
+        'key'        => [
             'required' => true,
         ],
         'description' => [
@@ -45,9 +45,9 @@ class PyroExtensionModuleLinkTypeCreateModulesStream extends Migration
         'key'         =>[
             'type'   => 'anomaly.field_type.select',
             'config' => [
-                'handler' => Pyro\ModuleLinkTypeExtension\Handler\AddonFieldOptionsHandler::class . '@handle',
+                'handler' => Pyro\CpActionLinkTypeExtension\Handler\AddonFieldOptionsHandler::class . '@handle',
             ],
-        ],
+            ],
         'description' => 'anomaly.field_type.textarea',
     ];
 

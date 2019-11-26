@@ -1,0 +1,9 @@
+{
+    "name": "pyro/cp_action_link_type-extension",
+    "type": "streams-addon",
+    "autoload": {
+        "psr-4": {
+            "Pyro\\CpActionLinkTypeExtension\\": "src/"
+        }
+    }
+}

@@ -14,8 +14,8 @@ class AdminHeaderMenuSeeder extends \Pyro\Platform\Database\Seeder
 
         $clients = $helper->label('Clients');
 
-        $helper->module('Users', [ 'link' => 'anomaly.module.users:users' ], [ 'parent_id' => $clients->getId() ]);
-        $helper->module('Roles', [ 'link' => 'anomaly.module.users:roles' ], [ 'parent_id' => $clients->getId() ]);
+        $helper->module('Users', [ 'key' => 'anomaly_module_users::users' ], [ 'parent_id' => $clients->getId() ]);
+        $helper->module('Roles', [ 'key' => 'anomaly_module_users::roles' ], [ 'parent_id' => $clients->getId() ]);
 
 
         $multi    = $helper->label('Multi Level');

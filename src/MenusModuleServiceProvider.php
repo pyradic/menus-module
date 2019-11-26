@@ -66,7 +66,7 @@ class MenusModuleServiceProvider extends AddonServiceProvider
 
     public function register(AddonIntegrator $integrator, AddonCollection $addons, Platform $platform)
     {
-        $names = [ 'divider', 'header', 'label', 'module', 'url' ];
+        $names = [ 'divider', 'header', 'label', 'module', 'url','cp_action' ];
         foreach ($names as $name) {
             $addons->push($integrator->register(
                 dirname(__DIR__) . '/addons/' . $name . '_link_type-extension/',

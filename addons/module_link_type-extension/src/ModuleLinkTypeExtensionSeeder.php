@@ -14,10 +14,10 @@ class ModuleLinkTypeExtensionSeeder extends Seeder
 
 
         $helper->model(ModuleLinkTypeModel::class);
-        $link   = $helper->createLink('Mod', [ 'link' => 'pyro.module.clients:types' ]);
-        $first  = $helper->createLink('Mod First', [ 'link' => 'pyro.module.clients:types' ], [ 'parent_id' => $link->getId() ]);
-        $second = $helper->createLink('Mod Second', [ 'link' => 'pyro.module.clients:types' ], [ 'parent_id' => $link->getId() ]);
-        $third  = $helper->createLink('Mod Third', [ 'link' => 'pyro.module.clients:types' ], [ 'parent_id' => $link->getId() ]);
+        $link   = $helper->createLink('Mod', [ 'key' => 'pyro_module_clients::types' ]);
+        $first  = $helper->createLink('Mod First', [ 'key' => 'pyro_module_clients::types' ], [ 'parent_id' => $link->getId() ]);
+        $second = $helper->createLink('Mod Second', [ 'key' => 'pyro_module_clients::types' ], [ 'parent_id' => $link->getId() ]);
+        $third  = $helper->createLink('Mod Third', [ 'key' => 'pyro_module_clients::types' ], [ 'parent_id' => $link->getId() ]);
 
 
         $helper->model(UrlLinkTypeModel::class);

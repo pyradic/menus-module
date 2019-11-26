@@ -1,7 +1,10 @@
 <?php namespace Pyro\ModuleLinkTypeExtension;
 
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
+use Illuminate\Support\NamespacedItemResolver;
+use Pyro\AdminTheme\Command\GetRecursiveControlPanelStructure;
 use Pyro\MenusModule\Ui\ControlPanelNavigation;
+use Pyro\ModuleLinkTypeExtension\Command\GetUrl;
 use Pyro\ModuleLinkTypeExtension\Form\ModuleLinkTypeFormBuilder;
 use Pyro\MenusModule\Link\Contract\LinkInterface;
 use Pyro\MenusModule\Type\LinkTypeExtension;
@@ -19,17 +22,7 @@ class ModuleLinkTypeExtension extends LinkTypeExtension
 
     public function url(LinkInterface $link)
     {
-        list($addonNamespaces, $sectionSlug) = explode(':', $link->getEntry()->link);
-        $links       = $this->navigation->resolve();
-        $moduleLink  = $links->get($addonNamespaces);
-        if(!$moduleLink){
-            return null;
-        }
-        $sectionLink = $moduleLink->children->firstWhere('slug', $sectionSlug);
-        if ( ! isset($sectionLink) || ! isset($sectionLink->href)) {
-            return null;
-        }
-        return $sectionLink->href; //url($this->dispatch(new GetUrl($link->getEntry())));
+        return $this->dispatchNow(new GetUrl($link->getEntry()));
     }
 
     /**
@@ -46,14 +39,15 @@ class ModuleLinkTypeExtension extends LinkTypeExtension
 
     public function info(LinkInterface $link)
     {
-        list($addonNamespaces, $sectionSlug) = explode(':', $link->getEntry()->link);
-        $links       = $this->navigation->resolve();
-        $moduleLink  = $links->get($addonNamespaces);
-        $sectionLink = $moduleLink->children->firstWhere('slug', $sectionSlug);
-        if ( ! isset($sectionLink) || ! isset($sectionLink->href)) {
-            return false;
-        }
-        return "{$moduleLink->title}/{$sectionLink->title}";
+        [ $nav, $sectionKey, $buttonKey ] = resolve(NamespacedItemResolver::class)->parseKey($link->getEntry()->key);
+        /** @var \Illuminate\Support\Collection|array $structure = \Pyro\AdminTheme\Command\GetRecursiveControlPanelStructure::example() */
+        $structure = $this->dispatchNow(new GetRecursiveControlPanelStructure());
+        $module = $structure->firstWhere('key', $nav);
+        $section  = $structure->pluck('children')
+            ->map->toArray()->flatten(1)
+            ->firstWhere('key', $nav . '::' . $sectionKey);
+
+        return "{$module['title']}/{$section['title']}";
     }
 
     /**

@@ -1,4 +1,4 @@
-<?php namespace Pyro\ModuleLinkTypeExtension\Command;
+<?php namespace Pyro\CpActionLinkTypeExtension\Command;
 
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Support\Parser;
