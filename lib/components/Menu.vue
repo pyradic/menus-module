@@ -5,11 +5,13 @@
         </template>
     </el-menu>
 </template>
-<script lang="ts">
+<script lang="tsx">
     import { component, prop, Styles } from '@pyro/platform';
     import Vue from 'vue';
     import { IMenu } from '../interfaces';
     import { Menu as ElMenu } from 'element-ui'
+
+
 
     @component()
     export default class Menu extends Vue {
@@ -36,6 +38,9 @@
 
         mounted() {
             this.$log('mounted', this)
+        }
+
+        render(h){
         }
 
     }

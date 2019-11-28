@@ -2,7 +2,7 @@
 
 namespace Pyro\ModuleLinkTypeExtension\Command;
 
-use Pyro\AdminTheme\Command\GetRecursiveControlPanelStructure;
+use Pyro\Platform\Ui\ControlPanel\Command\BuildControlPanelStructure;
 
 class GetOptionAction
 {
@@ -21,10 +21,10 @@ class GetOptionAction
     /** @return \Illuminate\Support\Collection */
     protected function getFlattened()
     {
-        /** @var array $structure = \Pyro\AdminTheme\Command\GetRecursiveControlPanelStructure::example() */
-        $structure = dispatch_now(new GetRecursiveControlPanelStructure);
-        $sections  = $structure->pluck('children')->map->toArray()->flatten(1);
-//        $buttons   = $sections->pluck('children')->map->toArray()->flatten(1);
+        /** @var \Pyro\Platform\Ui\ControlPanel\ControlPanelStructure $structure */
+        $structure = dispatch_now(new BuildControlPanelStructure());
+        /** @var \Illuminate\Support\Collection $sections */
+        $sections = $structure->pluck('children')->map->toArray()->flatten(1);
         return $sections; //$sections->merge($buttons);
     }
 }

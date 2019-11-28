@@ -2,14 +2,14 @@
 
 namespace Pyro\ModuleLinkTypeExtension\Command;
 
-use Pyro\AdminTheme\Command\GetRecursiveControlPanelStructure;
+use Pyro\Platform\Ui\ControlPanel\Command\BuildControlPanelStructure;
 
 class GetActionOptions
 {
     public function handle()
     {
         /** @var array $structure = \Pyro\AdminTheme\Command\GetRecursiveControlPanelStructure::example() */
-        $structure = dispatch_now(new GetRecursiveControlPanelStructure);
+        $structure = dispatch_now(new BuildControlPanelStructure());
         $options   = [];
         foreach ($structure as $nav) {
             $title             = $nav[ 'title' ];

@@ -3,22 +3,13 @@
 namespace Pyro\ModuleLinkTypeExtension\Handler;
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
-use Pyro\MenusModule\Ui\ControlPanelNavigation;
+use Pyro\ModuleLinkTypeExtension\Command\GetActionOptions;
 
 class AddonFieldOptionsHandler
 {
-    public function handle(FieldType $fieldType, ControlPanelNavigation $navigation)
+    public function handle(FieldType $fieldType)
     {
-        $options = [];
-        $links   = $navigation->resolve();
-        foreach ($links as $link) {
-            $options[ $link->title ] = [];
-            foreach ($link[ 'children' ] as $child) {
-                $options[ $link->title ][ $link->slug . ':' . $child->slug ] = $child->title;
-            }
-        }
-
+        $options = dispatch_now(new GetActionOptions());
         $fieldType->setOptions($options);
-        return [];
     }
 }
