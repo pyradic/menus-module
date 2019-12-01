@@ -13,9 +13,23 @@
     import { AxiosResponse } from 'axios'
 
     export interface AjaxFormData {
-        css: string
-        js: string
-        form: string
+        data: {
+            scripts: string
+            styles: string
+            form: string
+        }
+        platform: {
+            assets: Record<'styles' | 'scripts', Array<{
+                content: {}
+                index: number, //11
+                dir:string, // '/home/radic/projects/pyro/core/anomaly/icon-field_type/resources'
+                file:string, // '/home/radic/projects/pyro/core/anomaly/icon-field_type/resources/js/search.js'
+                key:string, // 'anomaly.field_type.icon::js/search.js'
+                namespace:string, // 'anomaly.field_type.icon'
+                path:string, // '/app/default/assets/core/anomaly/icon-field_type/resources/js/search.js?v=1574960066'
+                relative:string, // 'js/search.js'
+            }>>
+        }
     }
 
     export type AjaxFormResponse = AxiosResponse<AjaxFormData>
@@ -93,16 +107,46 @@
         setForm(res: AjaxFormResponse) {
             this.unsetForm();
 
-            this.formStyle             = document.createElement('style');
-            this.formStyle.textContent = res.data.css;
-            document.head.append(this.formStyle)
+            // this.formStyle             = document.createElement('style');
+            // this.formStyle.textContent = res.data.css;
+            // document.head.append(this.formStyle)
 
-            $(this.$el).html(res.data.form);
+            $(this.$el).html(res.data.data.form);
 
-            this.formScript             = document.createElement('script');
-            this.formScript.textContent = res.data.js;
-            document.body.append(this.formScript)
+            const replace = (id, content) => {
+                let currentEl = document.getElementById(id);
+                let replacerEl = document.createElement(currentEl.tagName)
+                for(const name of currentEl.getAttributeNames()){
+                    replacerEl.setAttribute(name, currentEl.getAttribute(name));
+                }
+                replacerEl.setAttribute('data-replace', Date.now().toString())
+                let tempEl = document.createElement(currentEl.tagName)
+                currentEl.replaceWith(tempEl);
+                currentEl.remove()
+                replacerEl.textContent = content;
+                tempEl.replaceWith(replacerEl)
+                tempEl.remove();
+            }
+            replace('assets_scripts', res.data.data.scripts)
+            replace('assets_styles', res.data.data.styles)
 
+            // this.formScript             = document.createElement('script');
+            // this.formScript.textContent = res.data.js;
+            // document.body.append(this.formScript)
+
+            // for(const script of res.data.platform.assets.scripts){
+            //     let el = document.getElementById(script.key);
+            //     if(el){
+            //         this.$log('script for ', script.key, 'already exists',{script,el})
+            //         continue;
+            //     }
+            //     this.$log('adding script for ', script.key, {script,el})
+            //     el             = document.createElement('script');
+            //     el.setAttribute('id', script.key)
+            //     el.setAttribute('src', script.path)
+            //     document.body.append(el)
+            //
+            // }
             return this.bind()
         }
 

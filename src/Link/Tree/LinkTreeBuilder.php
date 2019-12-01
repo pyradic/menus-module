@@ -46,11 +46,6 @@ class LinkTreeBuilder extends TreeBuilder
         ],
     ];
 
-    protected $assets = [
-        'scripts.js' => [
-            'pyro.module.menus::js/addon.js|webpack:menus:scripts',
-        ],
-    ];
 
 
     /**

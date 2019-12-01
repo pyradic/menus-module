@@ -1,7 +1,5 @@
-@import "~@pyro/platform/lib/styling/base";
-@import "~@pyro/admin-theme/lib/styling/base";
+@import "base";
 
-$menu-editor-prefix: #{$prefix}-me;
 
 .#{$menu-editor-prefix} {
     $self: &;
@@ -89,6 +87,7 @@ $menu-editor-prefix: #{$prefix}-me;
 
         transition: all .3s ease;
     }
+
 }
 
 @media (min-width: 992px) {

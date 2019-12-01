@@ -1,25 +1,16 @@
 <?php namespace Pyro\ModuleLinkTypeExtension;
 
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
-use Illuminate\Support\NamespacedItemResolver;
 use Pyro\MenusModule\Link\Contract\LinkInterface;
 use Pyro\MenusModule\Type\LinkTypeExtension;
-use Pyro\MenusModule\Ui\ControlPanelNavigation;
 use Pyro\ModuleLinkTypeExtension\Command\GetUrl;
 use Pyro\ModuleLinkTypeExtension\Form\ModuleLinkTypeFormBuilder;
 use Pyro\Platform\Ui\ControlPanel\Command\BuildControlPanelStructure;
 
 class ModuleLinkTypeExtension extends LinkTypeExtension
 {
-    /** @var ControlPanelNavigation */
-    protected $navigation;
-
     protected $provides = 'pyro.module.menus::link_type.module';
 
-    public function __construct(ControlPanelNavigation $navigation)
-    {
-        $this->navigation = $navigation;
-    }
 
     public function url(LinkInterface $link)
     {
@@ -40,16 +31,15 @@ class ModuleLinkTypeExtension extends LinkTypeExtension
 
     public function info(LinkInterface $link)
     {
-        [ $nav, $sectionKey, $buttonKey ] = resolve(NamespacedItemResolver::class)->parseKey($link->getEntry()->key);
-        /** @var \Illuminate\Support\Collection|array $structure = \Pyro\AdminTheme\Command\GetRecursiveControlPanelStructure::example() */
-        $structure          = $this->dispatchNow(new BuildControlPanelStructure());
-        $module             = $structure->firstWhere('key', $nav);
-        $section            = $structure->pluck('children')
-            ->map->toArray()->flatten(1)
-            ->firstWhere('key', $nav . '::' . $sectionKey);
-        $module[ 'title' ]  = trans($module[ 'title' ] ?? '');
+        $key = $link->getEntry()->key;
+        /** @var \Pyro\Platform\Ui\ControlPanel\ControlPanelStructure $structure */
+        $structure  = $this->dispatchNow(new BuildControlPanelStructure());
+        $navigation = $structure->getNavigation($key);
+        $section    = $structure->getSection($key);
+
+        $navigation[ 'title' ] = trans($navigation[ 'title' ] ?? '');
         $section[ 'title' ] = trans($section[ 'title' ] ?? '');
-        return "{$module['title']}/{$section['title']}";
+        return "{$navigation['title']}/{$section['title']}";
     }
 
     /**

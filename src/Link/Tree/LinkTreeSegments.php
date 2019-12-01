@@ -2,10 +2,10 @@
 
 use Anomaly\Streams\Platform\Support\Parser;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Support\Str;
 use Illuminate\Translation\Translator;
-use Pyro\MenusModule\Link\Command\ConvertStringToColorCode;
+use Pyro\MenusModule\Link\Command\ConvertStringToColors;
 use Pyro\MenusModule\Link\Contract\LinkInterface;
-
 
 /**
  * Class LinkTreeSegments
@@ -28,27 +28,30 @@ class LinkTreeSegments
         $builder->setSegments(
             [
                 'entry.title' => [
-                    'href' => 'admin/menus/links/{request.route.parameters.menu}/edit/{entry.id}',
+                    'href'       => 'admin/menus/links/{request.route.parameters.menu}/edit/{entry.id}',
                     'attributes' => [
-                        'data-type' => '{entry.type}'
-                    ]
+                        'data-type' => '{entry.type}',
+                    ],
                 ],
                 [
                     'class' => 'py-me__tree-item-tag',
                     'value' => function (LinkInterface $entry, Translator $translator, Parser $parser) {
 
-                        $type      = $entry->getType();
-                        $title     = $translator->trans($type->getTitle());
-                        $tooltip   = '';
-                        $converted = $this->dispatchNow(new ConvertStringToColorCode($type->getTitle()));
-                        $color     = $converted[ 'color' ];
-                        $infoColor = $converted[ 'darker' ];
-                        $html      = '<span class="small tag tag-success" data-toggle="tooltip" title="{tooltip}" style="padding-right:10px; background-color: {color};">{title}</span>';
-                        $info      = $type->info($entry) ?: '';
+                        $type    = $entry->getType();
+                        $title   = $translator->trans($type->getTitle());
+                        $ancronym   = Str::ancronym($title);
+                        $tooltip = '';
+                        /** @var array $converted = \Pyro\MenusModule\Link\Command\ConvertStringToColors::returnCompletion() */
+                        $converted    = $this->dispatchNow(new ConvertStringToColors($type->getTitle()));
+                        $color        = $converted[ 'color' ];
+                        $darkerColor  = $converted[ 'darker' ];
+                        $lighterColor = $converted[ 'lighter' ];
+                        $html         = '<span class="small tag tag-success" data-toggle="tooltip" title="{tooltip}" style="padding-right:10px; background-color: {color};">{ancronym}</span>';
+                        $info         = $type->info($entry) ?: '';
                         if ($type->info($entry)) {
-                            $html = '<span class="small info-tag tag tag-success" data-toggle="tooltip" title="{tooltip}" style="padding-right:10px; background-color: {infoColor}">{info}</span>' . $html;
+                            $html = '<span class="small info-tag tag tag-success" data-toggle="tooltip" title="{tooltip}" style="padding-right:10px; background-color: {lighterColor}">{info}</span>' . $html;
                         }
-                        return $parser->parse($html, compact('color', 'tooltip', 'title', 'info', 'infoColor'));
+                        return $parser->parse($html, compact('color', 'tooltip', 'title', 'info', 'darkerColor', 'lighterColor','ancronym'));
                     },
                 ],
                 [

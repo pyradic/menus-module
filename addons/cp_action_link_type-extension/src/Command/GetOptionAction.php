@@ -38,7 +38,7 @@ class GetOptionAction
         /** @var \Illuminate\Support\Collection $sections */
         $sections = $structure->pluck('children')->map->toArray()->flatten(1);
         /** @var \Illuminate\Support\Collection $buttons */
-        $buttons = $sections->pluck('children')->map->toArray()->flatten(1);
+        $buttons = $sections->pluck('children')->flatten(1);
         return $buttons; //$sections->merge($buttons);
     }
 }

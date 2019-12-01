@@ -24,22 +24,7 @@
                         ></py-menu-editor-form>
                     </template>
                     <template v-else>
-                        <ul class="nav nav-pills nav-stacked">
-                            <slot name="type_list">
-                                <li class="nav-item" v-for="(type, typeIndex) in types">
-                                    <a
-                                            href="javascript: void(0);"
-                                            @click="onListItemClick(type)"
-                                            :data-link-type="type.namespace"
-                                            class="nav-link link-type-option"
-                                    >
-                                        <strong>{{ type.title }}</strong>
-                                        <br>
-                                        <small>{{ type.description }}</small>
-                                    </a>
-                                </li>
-                            </slot>
-                        </ul>
+                        <py-menu-editor-type-list @click="onListItemClick" />
                     </template>
                 </div>
             </div>
@@ -62,7 +47,7 @@
     import $ from 'jquery'
     import { Component, component, prop } from '@pyro/platform';
     import { Aside as ElAside, Container as ElContainer, Dialog as ElDialog, Main as ElMain, Notification } from 'element-ui'
-    import { MenuType } from './interfaces';
+    import { MenuType } from '../../interfaces';
 
     export interface MenuEditorHideables {
         tree: boolean

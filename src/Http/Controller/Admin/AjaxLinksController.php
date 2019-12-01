@@ -2,12 +2,15 @@
 
 namespace Pyro\MenusModule\Http\Controller\Admin;
 
+use Anomaly\Streams\Platform\Addon\Addon;
 use Anomaly\Streams\Platform\Addon\Extension\ExtensionCollection;
 use Anomaly\Streams\Platform\Asset\Asset;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Anomaly\Streams\Platform\Support\Authorizer;
+use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
+use Pyro\MenusModule\Link\Command\ConvertStringToColors;
 use Pyro\MenusModule\Link\Contract\LinkInterface;
 use Pyro\MenusModule\Link\Contract\LinkRepositoryInterface;
 use Pyro\MenusModule\Link\Entry\EntryFormBuilder;
@@ -16,97 +19,36 @@ use Pyro\MenusModule\Link\Tree\LinkTreeBuilder;
 use Pyro\MenusModule\Menu\Contract\MenuInterface;
 use Pyro\MenusModule\Menu\Contract\MenuRepositoryInterface;
 use Pyro\MenusModule\Type\LinkTypeExtension;
+use Pyro\Platform\Http\PlatformAjaxResponse;
 
 class AjaxLinksController extends AdminController
 {
 
-
     public function index(MenuRepositoryInterface $menus, ExtensionCollection $extensions, $menu = null)
     {
-        app('Anomaly\Streams\Platform\View\ViewTemplate')->set('module', app('module.collection')->get('pyro.module.menus'));
+//        app('Anomaly\Streams\Platform\View\ViewTemplate')->set('module', app('module.collection')->get('pyro.module.menus'));
 
         if ( ! $menu) {
             $this->messages->warning('Please choose a menu first.');
             return $this->response->redirectTo('admin/navigation');
         }
 
-        $isPost = $this->request->isMethod('POST');
-
-        /** @var \Anomaly\Streams\Platform\Ui\Tree\TreeBuilder $treeBuilder */
-        $treeBuilder = $this->call('renderTree', compact('menu'));
-        $tree        = $treeBuilder->getTreeContent();
-        if ($isPost) {
+        $treeBuilder = $this->renderTree($menu);
+        if ($this->request->isMethod('POST')) {
             return $treeBuilder->getTreeResponse();
         }
+        $tree       = $treeBuilder->getTreeContent();
         $menu_types = $extensions->search('pyro.module.menus::link_type.*')->enabled();
         $this->setPlatformData($menu, $menu_types);
         return view('module::ajax_links', [ 'tree' => $tree, 'menu_types' => $menu_types, 'menu' => $menu ]);
     }
 
-    protected function call($method, $params = [])
+    public function tree($menu)
     {
-        return app()->call([ $this, $method ], $params);
-    }
-
-    protected $originalAssets;
-
-    protected function rebindAssetsForAjax()
-    {
-        $this->originalAssets = resolve(Asset::class);
-        app()->singleton(Asset::class, AjaxAsset::class);
-        $assets = resolve(Asset::class);
-        $assets->setDirectory(public_path());
-        return $assets;
-    }
-
-    protected function revertRebindAssets()
-    {
-        app()->singleton(Asset::class, Asset::class);
-        app()->instance(Asset::class, $this->originalAssets);
-        return $this->originalAssets;
-    }
-
-    public function renderTree(LinkTreeBuilder $treeBuilder, MenuRepositoryInterface $menus, $menu)
-    {
-        if ($menu instanceof MenuInterface === false) {
-            $menu = $menus->findBySlug((string)$menu);
-        }
-
-        abort_if(! $menu, Response::HTTP_NOT_ACCEPTABLE, 'Could not find menu');
-
-        $treeBuilder->setMenu($menu);
-        $treeBuilder->render();
-        return $treeBuilder;
-    }
-
-    protected function getRenderedTree($menu)
-    {
-
-        $assets = resolve(Asset::class);
-        $assets->add('tree', 'streams::js/tree/tree.js');
-        /** @var LinkTreeBuilder $treeBuilder */
-        $treeBuilder = $this->call('renderTree', compact('menu'));
-        $tree        = $treeBuilder->getTreeContent();
-        $treeJs      = $assets->content('tree');
-
-        $lines               = Str::lines($treeJs);
-        $total               = count($lines);
-        $lines[ 0 ]          = '(function(){';
-        $lines[ $total - 2 ] = '})()';
-        $treeJs              = implode("\n", $lines);
-
-        $tree = "{$tree}<script>{$treeJs}</script>";
-
-        return $tree;
-    }
-
-    public function getTree($menu)
-    {
-
         return response($this->getRenderedTree($menu));
     }
 
-    public function getForm(
+    public function create(
         LinkFormBuilder $linkFormBuilder,
         EntryFormBuilder $formBuilder,
         LinkRepositoryInterface $links,
@@ -141,59 +83,10 @@ class AjaxLinksController extends AdminController
         $formBuilder->addForm('type', $typeBuilder);
         $formBuilder->addForm('link', $link);
 
-        $formBuilder->setOption('wrapper_view', 'pyro.module.menus::wrapper_view');
-        $this->rebindAssetsForAjax();
-
-        if ($isPost) {
-            $formBuilder->setAjax(true);
-            $formBuilder->render();
-            return $formBuilder->getFormResponse();
-        }
-
-        $formBuilder->render();
-        $content = $formBuilder->getFormContent();
-
-        $assets = resolve(Asset::class);
-        $js     = $assets->has('scripts.js') ? $assets->content('scripts.js') : '';
-        $css    = $assets->has('styles.css') ? $assets->inline('styles.css') : '';
-        return response()->json([
-            'form' => $content->render(),
-            'css'  => $css,
-            'js'   => "
-(function(){
-    var module = {};
-
-    {$js}
-    ;
-
-}.call());                 
-            ",
-        ]);
-        return $content;
+        return $this->createFormResponse($type, $formBuilder);
     }
 
-    public function addFormAssetsToContent($content)
-    {
-        $assets = resolve(Asset::class);
-        $js     = $assets->has('scripts.js') ? $assets->content('scripts.js') : '';
-        $css    = $assets->has('styles.css') ? $assets->inline('styles.css') : '';
-        return "
-<style type='text/css'>{$css}</style>
-
-{$content}
-
-<py-script>
-(function(){
-    var module = {};
-
-    {$js}
-    ;
-
-}.call());     
- </py-script>";
-    }
-
-    public function getEditForm(
+    public function edit(
         LinkFormBuilder $linkFormBuilder,
         EntryFormBuilder $formBuilder,
         LinkRepositoryInterface $links,
@@ -219,65 +112,8 @@ class AjaxLinksController extends AdminController
             'link',
             $linkFormBuilder->setEntry($id)->setType($entry->getType())->setMenu($menu = $menus->findBySlug($slug))
         );
-
-        $assets = $this->rebindAssetsForAjax();
-
-        if ($isPost) {
-            $formBuilder->setAjax(true);
-            $formBuilder->render();
-            return $formBuilder->getFormResponse();
-        }
-
-        $formBuilder->render();
-        $content = $formBuilder->getFormContent();
-        $js  = $assets->has('scripts.js') ? $assets->content('scripts.js') : '';
-        $css = $assets->has('styles.css') ? $assets->inline('styles.css') : '';
-        return response()->json([
-            'form' => $content->render(),
-            'css'  => $css,
-            'js'   => "
-(function(){
-    var module = {};
-
-    {$js}
-    ;
-
-}.call());                 
-            ",
-        ]);
+        return $this->createFormResponse($type, $formBuilder);
     }
-
-    public function create(
-        LinkFormBuilder $link,
-        EntryFormBuilder $form,
-        LinkRepositoryInterface $links,
-        MenuRepositoryInterface $menus,
-        ExtensionCollection $extensions,
-        $menu,
-        $type
-    )
-    {
-        if ($type instanceof LinkTypeExtension === false) {
-            /* @var LinkTypeExtension $type */
-            $type = $extensions->get($type); //$this->request->get('menu_type'));
-        }
-        if ($menu instanceof MenuInterface === false) {
-            $menu = $menus->findBySlug($menu);
-        }
-
-        /* @var LinkInterface $parent */
-        if ($parent = $links->find($this->request->get('parent'))) {
-            $link->setParent($parent);
-        }
-
-        $form->addForm('type', $type->builder());
-        $form->addForm('link', $link->setType($type)->setMenu($menu));
-
-        $this->breadcrumbs->add($menu->getName(), 'admin/navigation/links/' . $menu->getSlug());
-
-        return $form;
-    }
-
 
     public function choose(ExtensionCollection $extensions, $menu)
     {
@@ -292,6 +128,22 @@ class AjaxLinksController extends AdminController
         );
     }
 
+    public function change(LinkRepositoryInterface $links, ExtensionCollection $extensions, $menu)
+    {
+        /* @var LinkInterface $link */
+        $link = $links->find($this->route->parameter('id'));
+
+        return view(
+            'module::ajax/change_link_type',
+            [
+                'link_types' => $extensions
+                    ->search('pyro.module.menus::link_type.*')
+                    ->enabled(),
+                'link'       => $link,
+                'menu'       => $menu,
+            ]
+        );
+    }
 
     public function delete(LinkRepositoryInterface $links, Authorizer $authorizer)
     {
@@ -306,6 +158,109 @@ class AjaxLinksController extends AdminController
         return $this->redirect->back();
     }
 
+    protected $originalAssets;
+
+    protected function rebindAssetsForAjax()
+    {
+        $this->originalAssets = resolve(Asset::class);
+        app()->singleton(Asset::class, AjaxAsset::class);
+        $assets = resolve(Asset::class);
+        $assets->setDirectory(public_path());
+        return $assets;
+    }
+
+    protected function revertRebindAssets()
+    {
+        app()->singleton(Asset::class, Asset::class);
+        app()->instance(Asset::class, $this->originalAssets);
+        return $this->originalAssets;
+    }
+
+    protected function renderTree($menu)
+    {
+        $treeBuilder = resolve(LinkTreeBuilder::class);
+        $menus       = resolve(MenuRepositoryInterface ::class);
+        if ($menu instanceof MenuInterface === false) {
+            $menu = $menus->findBySlug((string)$menu);
+        }
+
+        abort_if(! $menu, Response::HTTP_NOT_ACCEPTABLE, 'Could not find menu');
+
+        $treeBuilder->setMenu($menu);
+        $treeBuilder->render();
+        return $treeBuilder;
+    }
+
+    protected function getRenderedTree($menu)
+    {
+
+        $assets = resolve(Asset::class);
+        /** @noinspection PhpUnhandledExceptionInspection */
+        $assets->add('tree', 'streams::js/tree/tree.js');
+        /** @var LinkTreeBuilder $treeBuilder */
+        $treeBuilder = $this->renderTree($menu);
+        $tree        = $treeBuilder->getTreeContent();
+        $treeJs      = $assets->content('tree');
+
+        $lines               = Str::lines($treeJs);
+        $total               = count($lines);
+        $lines[ 0 ]          = '(function(){';
+        $lines[ $total - 2 ] = '})()';
+        $treeJs              = implode("\n", $lines);
+
+        $tree = "{$tree}<script>{$treeJs}</script>";
+
+        return $tree;
+    }
+
+    protected function createFormResponse(Addon $type, EntryFormBuilder $formBuilder)
+    {
+        $assets = $this->rebindAssetsForAjax();
+        if (request()->isMethod('POST')) {
+            $formBuilder->setAjax(true);
+            $formBuilder->render();
+            return $formBuilder->getFormResponse();
+        }
+        $formBuilder->render();
+
+        $data           = $this->getCachedFormAssets($type, $formBuilder);
+        $data[ 'form' ] = $formBuilder->getFormContent()->render(); // content is a view, requires render()
+
+        return PlatformAjaxResponse::create($data);
+    }
+
+    /**
+     * @param \Anomaly\Streams\Platform\Addon\Addon         $type
+     * @param \Pyro\MenusModule\Link\Entry\EntryFormBuilder $formBuilder
+     * @param \DateTimeInterface|\DateInterval|int|null     $ttl
+     *
+     * @return array = ['scripts' => '', 'styles' => '']
+     */
+    protected function getCachedFormAssets(Addon $type, EntryFormBuilder $formBuilder, $ttl = null)
+    {
+        $cacheKey = $type->getNamespace() . '::' . $formBuilder->getFormFields()->map->getType()->implode(';');
+        $ttl      = $ttl ?? now()->addDays(3);
+        return resolve(Repository::class)->remember($cacheKey, $ttl, function () {
+            return $this->getFormAssets();
+        });
+    }
+
+    /**
+     * @return array = ['scripts' => '', 'styles' => '']
+     */
+    protected function getFormAssets()
+    {
+        $assets = resolve(Asset::class);
+        $styles = implode(PHP_EOL, $assets->inlines('styles.css'));
+        $styles = \CssMin::minify($styles);
+
+        $scripts = implode(PHP_EOL, $assets->inlines('scripts.js'));
+        $scripts = implode(PHP_EOL, [ '(function(){', 'var module = {};', $scripts, ';', '}.call());' ]);
+        $scripts = \JSMin::minify($scripts);
+
+        return compact('styles', 'scripts');
+    }
+
     protected function setPlatformData(string $menuSlug, ExtensionCollection $menuTypes)
     {
         $types = $menuTypes->map(function (LinkTypeExtension $type) {
@@ -314,12 +269,17 @@ class AjaxLinksController extends AdminController
             $namespace   = $type->getNamespace();
             $title       = $type->getTitle();
             $slug        = $type->getSlug();
-            return array_map('trans', compact('name', 'description', 'namespace', 'title', 'slug'));
+            /** @var array $colors = \Pyro\MenusModule\Link\Command\ConvertStringToColors::returnCompletion() */
+            $colors       = dispatch_now(new ConvertStringToColors($type->getTitle()));
+            $color        = (string)$colors[ 'color' ];
+            $darkerColor  = (string)$colors[ 'darker' ];
+            $lighterColor = (string)$colors[ 'lighter' ];
+            return array_map('trans', compact('name', 'description', 'namespace', 'title', 'slug', 'color', 'darkerColor','lighterColor'));
         })->toArray();
 
         $urls = [
             'tree'   => $this->url->to("admin/menus/links/{$menuSlug}/tree"),
-            'create' => $this->url->to("admin/menus/links/{$menuSlug}/form"),
+            'create' => $this->url->to("admin/menus/links/{$menuSlug}/create"),
             'edit'   => $this->url->to("admin/menus/links/{$menuSlug}/edit"),
             'delete' => $this->url->to('admin/menus/links/delete'),
         ];

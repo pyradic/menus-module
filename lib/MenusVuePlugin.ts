@@ -14,8 +14,10 @@ export default class MenusVuePlugin {
         this.__installed = true
 
         prefixAndRegisterComponents(_Vue, {
-            'menu-editor'     : () => import('./components/menu-editor/MenuEditor.vue'),
-            'menu-editor-form': () => import('./components/menu-editor/MenuEditorForm.vue')
+            'menu-editor-view'     : () => import('./components/menu-editor/MenuEditorView.vue'),
+            'menu-editor-type-list': () => import('./components/menu-editor/MenuEditorTypeList.vue'),
+            'menu-editor'          : () => import('./components/menu-editor/MenuEditor.vue'),
+            'menu-editor-form'     : () => import('./components/menu-editor/MenuEditorForm.vue')
         })
 
         // prefixAndRegisterComponents(_Vue, {

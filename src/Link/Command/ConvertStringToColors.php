@@ -2,9 +2,11 @@
 
 namespace Pyro\MenusModule\Link\Command;
 
+use SSNepenthe\ColorUtils\Colors\Color;
+use SSNepenthe\ColorUtils\Colors\Rgb;
 use function SSNepenthe\ColorUtils\color;
 
-class ConvertStringToColorCode
+class ConvertStringToColors
 {
     /**
      * @var array
@@ -34,8 +36,8 @@ class ConvertStringToColorCode
                 $color     = $color->with([ 'lightness' => $lightness ]);
             }
 
-            $darker = $color->with([ 'lightness' => $lightness + 10 ]);
-            $lighter = $color->with([ 'lightness' => $lightness - 10 ]);
+            $darker  = $color->with([ 'lightness' => $lightness - 10 ]);
+            $lighter = $color->with([ 'lightness' => $lightness + 10 ]);
 
             static::$colorcache [ $this->string ] = compact('color', 'darker', 'lighter');
         }
@@ -49,4 +51,9 @@ class ConvertStringToColorCode
         return '#' . strtoupper($code);
     }
 
+    public static function returnCompletion()
+    {
+        $color = new Color(new Rgb(0, 0, 0));
+        return [ 'color' => $color, 'darker' => $color, 'lighter' => $color ];
+    }
 }

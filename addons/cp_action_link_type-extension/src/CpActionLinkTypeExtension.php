@@ -1,11 +1,10 @@
 <?php namespace Pyro\CpActionLinkTypeExtension;
 
-use Illuminate\Support\NamespacedItemResolver;
-use Pyro\AdminTheme\Command\GetRecursiveControlPanelStructure;
 use Pyro\CpActionLinkTypeExtension\Command\GetUrl;
 use Pyro\CpActionLinkTypeExtension\Form\CpActionLinkTypeFormBuilder;
 use Pyro\MenusModule\Link\Contract\LinkInterface;
 use Pyro\MenusModule\Type\LinkTypeExtension;
+use Pyro\Platform\Ui\ControlPanel\Command\BuildControlPanelStructure;
 
 class CpActionLinkTypeExtension extends LinkTypeExtension
 {
@@ -21,6 +20,7 @@ class CpActionLinkTypeExtension extends LinkTypeExtension
     {
         return $link->getEntry()->getTitle();
     }
+
     public function enabled(LinkInterface $link)
     {
         return true;
@@ -28,21 +28,14 @@ class CpActionLinkTypeExtension extends LinkTypeExtension
 
     public function info(LinkInterface $link)
     {
-$key=$link->getEntry()->key;
-        $resolver = resolve(NamespacedItemResolver::class);
-        [ $nav, $sectionKey, $buttonKey ] = $resolver->parseKey($key);
-        /** @var \Illuminate\Support\Collection|array $structure = \Pyro\AdminTheme\Command\GetRecursiveControlPanelStructure::example() */
-        $structure = $this->dispatchNow(new GetRecursiveControlPanelStructure());
-        $sections  = $structure->pluck('children')->map->toArray()->flatten(1);
-        $section = $sections->firstWhere('key', $nav . '::' . $sectionKey);
+        $key = $link->getEntry()->key;
+        /** @var \Pyro\Platform\Ui\ControlPanel\ControlPanelStructure $structure */
+        $structure = $this->dispatchNow(new BuildControlPanelStructure());
+        $section   = $structure->getSection($key);
+        $button    = $structure->getButton($key);
 
-        $buttons = $sections->pluck('children')->map->toArray()->flatten(1);
-        $button = $buttons->firstWhere('key', $nav . '::' . $sectionKey . '.' );
-
-
-        if ( ! isset($section) || ! isset($button)) {
-            return false;
-        }
+        $section[ 'title' ] = trans($section[ 'title' ] ?? '');
+        $button[ 'title' ]  = trans($button[ 'title' ] ?? '');
         return "{$section['title']} -> {$button['title']}";
     }
 

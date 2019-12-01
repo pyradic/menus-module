@@ -6,6 +6,9 @@ export interface MenuType {
     description:string
     title:string
     slug:string
+    color:string
+    darkerColor:string
+    lighterColor:string
 }
 
 export type MenuEditorMode = 'tree' | 'create' | 'edit' | 'hide'

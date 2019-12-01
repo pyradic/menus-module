@@ -44,29 +44,32 @@ class MenusModuleServiceProvider extends AddonServiceProvider
     ];
 
     protected $routes = [
-        'admin/menus'                                    => [ 'as' => 'pyro.module.menus', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\MenusController@index' ],
-        'admin/menus/choose'                             => [ 'as' => 'pyro.module.menus::choose', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\MenusController@choose' ],
-        'admin/menus/create'                             => [ 'as' => 'pyro.module.menus::create', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\MenusController@create' ],
-        'admin/menus/edit/{id}'                          => [ 'as' => 'pyro.module.menus::edit', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\MenusController@edit' ],
-        'admin/menus/links/{menu?}'                      => [ 'as' => 'pyro.module.menus::links', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\AjaxLinksController@index', 'csrf' => false ],
-        'admin/menus/links/{menu}/tree'                  => [ 'as' => 'pyro.module.menus::links.tree', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\AjaxLinksController@getTree' ],
-        'admin/menus/links/{menu}/form/{type}/{parent?}' => [ 'as' => 'pyro.module.menus::links.form', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\AjaxLinksController@getForm' ],
-        'admin/menus/links/{menu}/edit/{id}'             => [ 'as' => 'pyro.module.menus::links.edit', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\AjaxLinksController@getEditForm' ],
-        'admin/menus/links/{menu}/create'                => [ 'as' => 'pyro.module.menus::links.create', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\LinksController@create' ],
-        'admin/menus/links/{menu}/view/{id}'             => [ 'as' => 'pyro.module.menus::links.view', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\LinksController@view' ],
-        'admin/menus/links/{menu}/change/{id}'           => [ 'as' => 'pyro.module.menus::links.change', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\LinksController@change' ],
-        'admin/menus/links/delete/{id}'                  => [ 'as' => 'pyro.module.menus::links.delete', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\AjaxLinksController@delete' ],
-//        'admin/menus/links/delete/{id}'                  => [ 'as' => 'pyro.module.menus::links.delete', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\LinksController@delete' ],
-        'admin/menus/links/choose/{menu}/{parent?}'      => [ 'as' => 'pyro.module.menus::links.choose', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\LinksController@choose' ],
+        'admin/menus'           => [ 'as' => 'pyro.module.menus', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\MenusController@index' ],
+        'admin/menus/choose'    => [ 'as' => 'pyro.module.menus::choose', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\MenusController@choose' ],
+        'admin/menus/create'    => [ 'as' => 'pyro.module.menus::create', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\MenusController@create' ],
+        'admin/menus/edit/{id}' => [ 'as' => 'pyro.module.menus::edit', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\MenusController@edit' ],
 
-        //        'admin/menus/links/{menu?}'                 => 'Pyro\MenusModule\Http\Controller\Admin\LinksController@index',
-        //        'admin/menus/links/{menu}/edit/{id}'        => 'Pyro\MenusModule\Http\Controller\Admin\LinksController@edit',
+        'admin/menus/links/{menu?}'                        => [ 'as' => 'pyro.module.menus::links', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\AjaxLinksController@index', 'csrf' => false ],
+        'admin/menus/links/{menu}/tree'                    => [ 'as' => 'pyro.module.menus::links.tree', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\AjaxLinksController@tree' ],
+        'admin/menus/links/{menu}/create/{type}/{parent?}' => [ 'as' => 'pyro.module.menus::links.create', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\AjaxLinksController@create' ],
+        'admin/menus/links/{menu}/edit/{id}'               => [ 'as' => 'pyro.module.menus::links.edit', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\AjaxLinksController@edit' ],
+        'admin/menus/links/{menu}/view/{id}'               => [ 'as' => 'pyro.module.menus::links.view', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\AjaxLinksController@view' ],
+        'admin/menus/links/{menu}/change/{id}'             => [ 'as' => 'pyro.module.menus::links.change', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\AjaxLinksController@change' ],
+        'admin/menus/links/delete/{id}'                    => [ 'as' => 'pyro.module.menus::links.delete', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\AjaxLinksController@delete' ],
+        'admin/menus/links/choose/{menu}/{parent?}'        => [ 'as' => 'pyro.module.menus::links.choose', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\AjaxLinksController@choose' ],
+
+//        'admin/menus/links/{menu?}'            => [ 'as' => 'pyro.module.menus::links', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\LinksController@index', 'csrf' => false ],
+//        'admin/menus/links/{menu}/create'      => [ 'as' => 'pyro.module.menus::links.create', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\LinksController@create' ],
+//        'admin/menus/links/{menu}/edit/{id}'   => [ 'as' => 'pyro.module.menus::links.edit', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\LinksController@edit', ],
+//        'admin/menus/links/{menu}/view/{id}'   => [ 'as' => 'pyro.module.menus::links.view', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\LinksController@view' ],
+//        'admin/menus/links/{menu}/change/{id}' => [ 'as' => 'pyro.module.menus::links.change', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\LinksController@change' ],
+//        'admin/menus/links/delete/{id}'        => [ 'as' => 'pyro.module.menus::links.delete', 'uses' => 'Pyro\MenusModule\Http\Controller\Admin\LinksController@delete' ],
 
     ];
 
     public function register(AddonIntegrator $integrator, AddonCollection $addons, Platform $platform)
     {
-        $names = [ 'divider', 'header', 'label', 'module', 'url','cp_action' ];
+        $names = [ 'divider', 'header', 'label', 'module', 'url', 'cp_action' ];
         foreach ($names as $name) {
             $addons->push($integrator->register(
                 dirname(__DIR__) . '/addons/' . $name . '_link_type-extension/',

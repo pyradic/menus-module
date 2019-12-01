@@ -2,25 +2,26 @@
 
 namespace Pyro\CpActionLinkTypeExtension\Command;
 
-use Pyro\AdminTheme\Command\GetRecursiveControlPanelStructure;
+use Pyro\Platform\Ui\ControlPanel\Command\BuildControlPanelStructure;
 
 class GetActionOptions
 {
     public function handle()
     {
         /** @var array $structure = \Pyro\AdminTheme\Command\GetRecursiveControlPanelStructure::example() */
-        $structure = dispatch_now(new GetRecursiveControlPanelStructure);
+        $structure = dispatch_now(new BuildControlPanelStructure());
         $options   = [];
         foreach ($structure as $nav) {
+            $title             = trans($nav[ 'title' ]);
+            $options[ $title ] = [];
             foreach ($nav[ 'children' ] as $section) {
-                $title             = $nav[ 'title' ] . ' > ' . $section[ 'title' ];
-                $options[ $title ] = [];
+//                $title             = trans($nav[ 'title' ]) . ' > ' . trans($section[ 'title' ]);
                 foreach ($section[ 'children' ] as $button) {
-                    $options[ $title ][ $button[ 'key' ] ] = $button[ 'title' ];
+                    $options[ $title ][ $button[ 'key' ] ] = trans($section[ 'title' ]) . ' > ' . trans($button[ 'title' ]);
                 }
-                if(count($options[ $title ]) === 0){
-                    unset($options[ $title ]);
-                }
+            }
+            if(count($options[ $title ]) === 0){
+                unset($options[ $title ]);
             }
         }
         return $options;
