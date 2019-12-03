@@ -16,7 +16,10 @@ use Pyro\MenusModule\Menu\Contract\MenuInterface;
 use Pyro\MenusModule\Menu\Contract\MenuRepositoryInterface;
 use Pyro\MenusModule\Menu\MenuModel;
 use Pyro\MenusModule\Menu\MenuRepository;
+use Pyro\MenusModule\Seeder\AdminFooterMenuSeeder;
+use Pyro\MenusModule\Seeder\AdminHeaderMenuSeeder;
 use Pyro\MenusModule\Seeder\AdminMenuSeeder;
+use Pyro\MenusModule\Seeder\AdminSidebarMenuSeeder;
 use Pyro\Platform\Platform;
 
 /**
@@ -79,7 +82,10 @@ class MenusModuleServiceProvider extends AddonServiceProvider
             ));
         }
 
-        AdminMenuSeeder::registerSeed();
+        AdminMenuSeeder::registerSeed('menu.admin');
+        AdminFooterMenuSeeder::registerSeed('menu.admin.footer');
+        AdminHeaderMenuSeeder::registerSeed('menu.admin.header');
+        AdminSidebarMenuSeeder::registerSeed('menu.admin.sidebar');
 
         $platform->addWebpackEntry('@pyro/menus-module');
 

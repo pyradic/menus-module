@@ -14,10 +14,14 @@ class AdminHeaderMenuSeeder extends \Pyro\Platform\Database\Seeder
 
         $clients = $helper->label('Clients');
 
-        $helper->module('Users', [ 'key' => 'anomaly_module_users::users' ], [ 'parent_id' => $clients->getId() ]);
-        $helper->module('Roles', [ 'key' => 'anomaly_module_users::roles' ], [ 'parent_id' => $clients->getId() ]);
+        $helper->module('Users', [ 'key' => 'anomaly.module.users::users' ], [ 'parent_id' => $clients->getId() ]);
+        $helper->module('Roles', [ 'key' => 'anomaly.module.users::roles' ], [ 'parent_id' => $clients->getId() ]);
 
-
+        $actions          = $helper->label('Acties');
+        $dashboardActions = $helper->label('Dashboard', [],[ 'parent_id' => $actions->id ]);
+        $helper->action('Beheer dashboards', [ 'key' => 'anomaly.module.dashboard::dashboards.manage' ], [ 'parent_id' => $dashboardActions->id ]);
+        $helper->action('Dashboard toevoegen', [ 'key' => 'anomaly.module.dashboard::dashboards.new_dashboard' ], [ 'parent_id' => $dashboardActions->id ]);
+        $helper->action('Widget toevoegen', [ 'key' => 'anomaly.module.dashboard::dashboards.new_widget' ], [ 'parent_id' => $dashboardActions->id ]);
         $multi    = $helper->label('Multi Level');
         $children = $this->createMultiLinksChildren($multi);
         $children = $this->createMultiLinksChildren($children[ 3 ]);
@@ -27,7 +31,6 @@ class AdminHeaderMenuSeeder extends \Pyro\Platform\Database\Seeder
         $children = $this->createMultiLinksChildren($children[ 2 ]);
         $children = $this->createMultiLinksChildren($children[ 2 ]);
     }
-
 
     protected function createMultiLinksChildren(EloquentModel $parent)
     {

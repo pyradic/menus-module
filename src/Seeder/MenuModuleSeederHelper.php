@@ -3,6 +3,7 @@
 namespace Pyro\MenusModule\Seeder;
 
 use Anomaly\Streams\Platform\Entry\EntryRepository;
+use Pyro\CpActionLinkTypeExtension\CpActionLinkTypeModel;
 use Pyro\DividerLinkTypeExtension\DividerLinkTypeModel;
 use Pyro\HeaderLinkTypeExtension\HeaderLinkTypeModel;
 use Pyro\LabelLinkTypeExtension\LabelLinkTypeModel;
@@ -123,4 +124,11 @@ class MenuModuleSeederHelper extends SeederHelper
         $this->model(UrlLinkTypeModel::class);
         return $this->createLink($title, $entryData, $linkData);
     }
+
+    public function action($title = null, array $entryData = [], array $linkData = [])
+    {
+        $this->model(CpActionLinkTypeModel::class);
+        return $this->createLink($title, $entryData, $linkData);
+    }
+
 }
