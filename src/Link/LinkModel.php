@@ -22,7 +22,7 @@ use Pyro\MenusModule\Type\Contract\LinkTypeInterface;
  * @property int|null $updated_by_id
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property int $menu_id
- * @property string $type
+ * @property \Pyro\MenusModule\Type\LinkTypeExtension $type
  * @property int $entry_id
  * @property string $entry_type
  * @property string $target
@@ -41,6 +41,7 @@ use Pyro\MenusModule\Type\Contract\LinkTypeInterface;
  * @property \Anomaly\UsersModule\User\UserModel|null $updatedBy
  * @property \Anomaly\Streams\Platform\Version\VersionCollection|\Anomaly\Streams\Platform\Version\VersionModel[] $versions
  * @property int|null $versions_count
+ * @property \Anomaly\UsersModule\Role\RoleModel $allowed_roles
  * @method static \Pyro\MenusModule\Link\LinkModel make($attributes=[])
  * @method static \Anomaly\Streams\Platform\Entry\EntryQueryBuilder|\Pyro\MenusModule\Link\LinkModel newModelQuery()
  * @method static \Anomaly\Streams\Platform\Entry\EntryQueryBuilder|\Pyro\MenusModule\Link\LinkModel newQuery()
@@ -48,6 +49,7 @@ use Pyro\MenusModule\Type\Contract\LinkTypeInterface;
  * @method static \Illuminate\Database\Eloquent\Builder|\Anomaly\Streams\Platform\Entry\EntryModel sorted($direction = 'asc')
  * @method static \Illuminate\Database\Eloquent\Builder|\Anomaly\Streams\Platform\Model\EloquentModel translated()
  * @method static \Illuminate\Database\Eloquent\Builder|\Anomaly\Streams\Platform\Model\EloquentModel translatedIn($locale)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereAllowedRoles($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereClass($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereCreatedById($value)

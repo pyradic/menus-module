@@ -112,6 +112,11 @@
             // document.head.append(this.formStyle)
 
             $(this.$el).html(res.data.data.form);
+            // let $scripts = $(res.data.data.scripts)
+            // let $styles = $(res.data.data.styles)
+            // $('body')
+            //     .append($scripts)
+            //     .append($styles);
 
             const replace = (id, content) => {
                 let currentEl = document.getElementById(id);

@@ -33,6 +33,9 @@ use Pyro\MenusModule\Menu\Contract\MenuInterface;
  * @property \Anomaly\UsersModule\User\UserModel|null $updatedBy
  * @property \Anomaly\Streams\Platform\Version\VersionCollection|\Anomaly\Streams\Platform\Version\VersionModel[] $versions
  * @property int|null $versions_count
+ * @property string $name
+ * @property string $description
+ * @property \Anomaly\UsersModule\Role\RoleModel $allowed_roles
  * @method static \Pyro\MenusModule\Menu\MenuModel make($attributes=[])
  * @method static \Anomaly\Streams\Platform\Entry\EntryQueryBuilder|\Pyro\MenusModule\Menu\MenuModel newModelQuery()
  * @method static \Anomaly\Streams\Platform\Entry\EntryQueryBuilder|\Pyro\MenusModule\Menu\MenuModel newQuery()
@@ -40,10 +43,13 @@ use Pyro\MenusModule\Menu\Contract\MenuInterface;
  * @method static \Illuminate\Database\Eloquent\Builder|\Anomaly\Streams\Platform\Entry\EntryModel sorted($direction = 'asc')
  * @method static \Illuminate\Database\Eloquent\Builder|\Anomaly\Streams\Platform\Model\EloquentModel translated()
  * @method static \Illuminate\Database\Eloquent\Builder|\Anomaly\Streams\Platform\Model\EloquentModel translatedIn($locale)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereAllowedRoles($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereCreatedById($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereSortOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereUpdatedAt($value)
