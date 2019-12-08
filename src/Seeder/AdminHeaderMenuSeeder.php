@@ -14,15 +14,15 @@ class AdminHeaderMenuSeeder extends \Pyro\Platform\Database\Seeder
 
         $clients = $helper->label('Clients');
 
-        $helper->module('Users', [ 'key' => 'anomaly.module.users::users' ], [ 'parent_id' => $clients->getId() ]);
-        $helper->module('Roles', [ 'key' => 'anomaly.module.users::roles' ], [ 'parent_id' => $clients->getId() ]);
+        $helper->module('Users', [ 'key' => 'anomaly.module.users::users' ], [ 'parent_id' => $clients->getId(),'icon' => 'fa fa-users' ]);
+        $helper->module('Roles', [ 'key' => 'anomaly.module.users::roles' ], [ 'parent_id' => $clients->getId(),'icon' => 'fa fa-database' ]);
 
-        $actions          = $helper->label('Acties');
-        $dashboardActions = $helper->label('Dashboard', [],[ 'parent_id' => $actions->id ]);
-        $helper->action('Beheer dashboards', [ 'key' => 'anomaly.module.dashboard::dashboards.manage' ], [ 'parent_id' => $dashboardActions->id ]);
-        $helper->action('Dashboard toevoegen', [ 'key' => 'anomaly.module.dashboard::dashboards.new_dashboard' ], [ 'parent_id' => $dashboardActions->id ]);
-        $helper->action('Widget toevoegen', [ 'key' => 'anomaly.module.dashboard::dashboards.new_widget' ], [ 'parent_id' => $dashboardActions->id ]);
-        $multi    = $helper->label('Multi Level');
+        $actions          = $helper->label('Acties',[],['icon' => 'fa fa-bolt']);
+        $dashboardActions = $helper->label('Dashboard', [],[ 'parent_id' => $actions->id,'icon' => 'fa fa-tachometer' ]);
+        $helper->action('Beheer dashboards', [ 'key' => 'anomaly.module.dashboard::dashboards.manage' ], [ 'parent_id' => $dashboardActions->id,'icon' => 'fa fa-cog' ]);
+        $helper->action('Dashboard toevoegen', [ 'key' => 'anomaly.module.dashboard::dashboards.new_dashboard' ], [ 'parent_id' => $dashboardActions->id,'icon' => 'fa fa-plus' ]);
+        $helper->action('Widget toevoegen', [ 'key' => 'anomaly.module.dashboard::dashboards.new_widget' ], [ 'parent_id' => $dashboardActions->id, 'icon' => 'fa fa-plus-circle' ]);
+        $multi    = $helper->label('Multi Level',[],['icon' => 'fa fa-bars']);
         $children = $this->createMultiLinksChildren($multi);
         $children = $this->createMultiLinksChildren($children[ 3 ]);
         $children = $this->createMultiLinksChildren($children[ 1 ]);
