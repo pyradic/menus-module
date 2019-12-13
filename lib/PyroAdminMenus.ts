@@ -1,5 +1,5 @@
 import $ from 'jquery';
-
+declare const log
 
 interface FormPostResponse {
     redirect?: string
@@ -201,22 +201,22 @@ export class PyroAdminMenus {
 }
 
 
-$.fn.pyroAdminMenus = function (...params: any[]) {
-    let retVal;
-    this.each(function (index, element) {
-        const $el = $(element)
-        let pyroAdminMenus: PyroAdminMenus
-        if ( $el.data('pyrocmsAdminMenus') ) {
-            pyroAdminMenus = $el.data('pyrocmsAdminMenus')
-        } else {
-            pyroAdminMenus = new PyroAdminMenus($(element), params[ 0 ] as PyroAdminMenusConfig)
-        }
-        retVal = pyroAdminMenus
-        let config = params[0]
-        if ( typeof config === 'string' ) {
-            let methodName = params.shift();
-            retVal         = pyroAdminMenus[ methodName ].apply(pyroAdminMenus, params);
-        }
-    })
-    return retVal;
-}
+// $.fn.pyroAdminMenus = function (...params: any[]) {
+//     let retVal;
+//     this.each(function (index, element) {
+//         const $el = $(element)
+//         let pyroAdminMenus: PyroAdminMenus
+//         if ( $el.data('pyrocmsAdminMenus') ) {
+//             pyroAdminMenus = $el.data('pyrocmsAdminMenus')
+//         } else {
+//             pyroAdminMenus = new PyroAdminMenus($(element), params[ 0 ] as PyroAdminMenusConfig)
+//         }
+//         retVal = pyroAdminMenus
+//         let config = params[0]
+//         if ( typeof config === 'string' ) {
+//             let methodName = params.shift();
+//             retVal         = pyroAdminMenus[ methodName ].apply(pyroAdminMenus, params);
+//         }
+//     })
+//     return retVal;
+// }
