@@ -29,6 +29,10 @@ use Pyro\MenusModule\Type\Contract\LinkTypeInterface;
  * @property string|null $class
  * @property int|null $parent_id
  * @property string|null $icon
+ * @property \Pyro\ActivityLogModule\Activity\ActivityCollection|\Pyro\ActivityLogModule\Activity\ActivityModel[] $actions
+ * @property int|null $actions_count
+ * @property \Pyro\ActivityLogModule\Activity\ActivityCollection|\Pyro\ActivityLogModule\Activity\ActivityModel[] $activityLogs
+ * @property int|null $activity_logs_count
  * @property \Anomaly\UsersModule\Role\RoleCollection|\Anomaly\UsersModule\Role\RoleModel[] $allowedRoles
  * @property int|null $allowed_roles_count
  * @property \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\LinkModel[] $children

@@ -18,7 +18,7 @@ use Pyro\MenusModule\Menu\Contract\MenuRepositoryInterface;
  * @method \Anomaly\Streams\Platform\Entry\EntryCollection|\Pyro\MenusModule\Menu\Contract\MenuInterface[] findAllBy(string $key, $value) 
  * @method \Pyro\MenusModule\Menu\Contract\MenuInterface findTrashed($id) 
  * @method \Anomaly\Streams\Platform\Entry\EntryQueryBuilder newQuery() 
- * @method \Pyro\MenusModule\Menu\Contract\MenuInterface create(array $attributes = ['name' => '','slug' => '','description' => '','allowed_roles' => '',]) 
+ * @method \Pyro\MenusModule\Menu\Contract\MenuInterface update(array $attributes = ['name' => '','slug' => '','description' => '','allowed_roles' => '',]) 
  * @method \Pyro\MenusModule\Menu\MenuModel getModel() 
  * @method \Pyro\MenusModule\Menu\Contract\MenuInterface newInstance(array $attributes = []) 
  * @method \Anomaly\Streams\Platform\Entry\EntryCollection|\Pyro\MenusModule\Menu\Contract\MenuInterface[] sorted($direction = "asc") 

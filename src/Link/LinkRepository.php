@@ -18,7 +18,7 @@ use Pyro\MenusModule\Menu\Contract\MenuInterface;
  * @method \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\Contract\LinkInterface[] findAllBy(string $key, $value) 
  * @method \Pyro\MenusModule\Link\Contract\LinkInterface findTrashed($id) 
  * @method \Anomaly\Streams\Platform\Entry\EntryQueryBuilder newQuery() 
- * @method \Pyro\MenusModule\Link\Contract\LinkInterface create(array $attributes = ['menu' => '','type' => '','entry' => '','target' => '','class' => '','parent' => '','allowed_roles' => '','icon' => '',]) 
+ * @method \Pyro\MenusModule\Link\Contract\LinkInterface update(array $attributes = ['menu' => '','type' => '','entry' => '','target' => '','class' => '','parent' => '','allowed_roles' => '','icon' => '',]) 
  * @method \Pyro\MenusModule\Link\LinkModel getModel() 
  * @method \Pyro\MenusModule\Link\Contract\LinkInterface newInstance(array $attributes = []) 
  * @method \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\Contract\LinkInterface[] sorted($direction = "asc") 
