@@ -8,6 +8,9 @@ use Pyro\MenusModule\Link\LinkCollection;
  * \Pyro\MenusModule\Menu\Contract\MenuInterface
  *
  * @mixin \Pyro\MenusModule\Menu\MenuModel
+ * @mixin \Pyro\MenusModule\Menu\MenuModel
+ * @mixin \Pyro\MenusModule\Menu\MenuModel
+ * @mixin  \Pyro\MenusModule\Menu\MenuModel
  */
 interface MenuInterface extends EntryInterface
 {

@@ -6,6 +6,9 @@ use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
  * \Pyro\MenusModule\Menu\Contract\MenuRepositoryInterface
  *
  * @mixin \Pyro\MenusModule\Menu\MenuRepository
+ * @mixin \Pyro\MenusModule\Menu\MenuRepository
+ * @mixin \Pyro\MenusModule\Menu\MenuRepository
+ * @mixin  \Pyro\MenusModule\Menu\MenuRepository
  */
 interface MenuRepositoryInterface extends EntryRepositoryInterface
 {

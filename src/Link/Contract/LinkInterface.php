@@ -10,6 +10,9 @@ use Pyro\MenusModule\Type\LinkTypeExtension;
  * \Pyro\MenusModule\Link\Contract\LinkInterface
  *
  * @mixin \Pyro\MenusModule\Link\LinkModel
+ * @mixin \Pyro\MenusModule\Link\LinkModel
+ * @mixin \Pyro\MenusModule\Link\LinkModel
+ * @mixin  \Pyro\MenusModule\Link\LinkModel
  */
 interface LinkInterface extends EntryInterface
 {
