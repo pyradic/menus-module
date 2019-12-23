@@ -7,6 +7,7 @@ use Anomaly\Streams\Platform\Addon\Extension\ExtensionCollection;
 use Anomaly\Streams\Platform\Asset\Asset;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Anomaly\Streams\Platform\Support\Authorizer;
+use Anomaly\Streams\Platform\View\ViewOverrides;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
@@ -23,6 +24,11 @@ use Pyro\Platform\Http\PlatformAjaxResponse;
 
 class AjaxLinksController extends AdminController
 {
+    public function __construct()
+    {
+        parent::__construct();
+        resolve(ViewOverrides::class)->put('anomaly.field_type.multiple::tags', 'pyro.module.menus::tags');
+    }
 
     public function index(MenuRepositoryInterface $menus, ExtensionCollection $extensions, $menu = null)
     {
