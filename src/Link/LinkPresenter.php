@@ -12,6 +12,15 @@ use Pyro\MenusModule\Link\Contract\LinkInterface;
  * @mixin \Pyro\MenusModule\Link\LinkModel
  * @mixin \Pyro\MenusModule\Link\LinkModel
  * @mixin \Pyro\MenusModule\Link\LinkModel
+ * @mixin \Pyro\MenusModule\Link\LinkModel
+ * @mixin \Pyro\MenusModule\Link\LinkModel
+ * @mixin \Pyro\MenusModule\Link\LinkModel
+ * @mixin \Pyro\MenusModule\Link\LinkModel
+ * @mixin \Pyro\MenusModule\Link\LinkModel
+ * @mixin \Pyro\MenusModule\Link\LinkModel
+ * @mixin \Pyro\MenusModule\Link\LinkModel
+ * @mixin \Pyro\MenusModule\Link\LinkModel
+ * @mixin \Pyro\MenusModule\Link\LinkModel
  * @mixin  \Pyro\MenusModule\Link\LinkModel
  * @property  \Pyro\MenusModule\Link\LinkModel $object
  */

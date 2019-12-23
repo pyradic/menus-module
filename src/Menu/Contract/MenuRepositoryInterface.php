@@ -10,6 +10,15 @@ use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
  * @mixin \Pyro\MenusModule\Menu\MenuRepository
  * @mixin \Pyro\MenusModule\Menu\MenuRepository
  * @mixin \Pyro\MenusModule\Menu\MenuRepository
+ * @mixin \Pyro\MenusModule\Menu\MenuRepository
+ * @mixin \Pyro\MenusModule\Menu\MenuRepository
+ * @mixin \Pyro\MenusModule\Menu\MenuRepository
+ * @mixin \Pyro\MenusModule\Menu\MenuRepository
+ * @mixin \Pyro\MenusModule\Menu\MenuRepository
+ * @mixin \Pyro\MenusModule\Menu\MenuRepository
+ * @mixin \Pyro\MenusModule\Menu\MenuRepository
+ * @mixin \Pyro\MenusModule\Menu\MenuRepository
+ * @mixin \Pyro\MenusModule\Menu\MenuRepository
  * @mixin  \Pyro\MenusModule\Menu\MenuRepository
  */
 interface MenuRepositoryInterface extends EntryRepositoryInterface

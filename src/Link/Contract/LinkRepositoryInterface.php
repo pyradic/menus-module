@@ -12,6 +12,15 @@ use Pyro\MenusModule\Menu\Contract\MenuInterface;
  * @mixin \Pyro\MenusModule\Link\LinkRepository
  * @mixin \Pyro\MenusModule\Link\LinkRepository
  * @mixin \Pyro\MenusModule\Link\LinkRepository
+ * @mixin \Pyro\MenusModule\Link\LinkRepository
+ * @mixin \Pyro\MenusModule\Link\LinkRepository
+ * @mixin \Pyro\MenusModule\Link\LinkRepository
+ * @mixin \Pyro\MenusModule\Link\LinkRepository
+ * @mixin \Pyro\MenusModule\Link\LinkRepository
+ * @mixin \Pyro\MenusModule\Link\LinkRepository
+ * @mixin \Pyro\MenusModule\Link\LinkRepository
+ * @mixin \Pyro\MenusModule\Link\LinkRepository
+ * @mixin \Pyro\MenusModule\Link\LinkRepository
  * @mixin  \Pyro\MenusModule\Link\LinkRepository
  */
 interface LinkRepositoryInterface extends EntryRepositoryInterface
