@@ -1,7 +1,7 @@
-import { PyroBuilder } from '@pyro/webpack';
+import { Builder } from '@pyro/webpack';
 
 
-export function configure(builder: PyroBuilder) {
+export function configure(builder: Builder) {
     builder.hooks.initialized.tap('@pyro/menus-module', builder => {
         const { wp } = builder
 
