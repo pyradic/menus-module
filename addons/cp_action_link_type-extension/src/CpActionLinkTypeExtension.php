@@ -1,5 +1,6 @@
 <?php namespace Pyro\CpActionLinkTypeExtension;
 
+use League\Uri\Uri;
 use Pyro\CpActionLinkTypeExtension\Command\GetUrl;
 use Pyro\CpActionLinkTypeExtension\Form\CpActionLinkTypeFormBuilder;
 use Pyro\MenusModule\Link\Contract\LinkInterface;

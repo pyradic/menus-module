@@ -60,6 +60,12 @@ class PyroModuleMenusCreateMenusFields extends Migration
                 ],
             ],
         ],
+        'hash' => [
+            'type' => 'anomaly.field_type.text',
+        ],
+        'querystring' => [
+            'type' => 'anomaly.field_type.text',
+        ],
         'icon' => [
             'type' => 'anomaly.field_type.icon',
             'config' => [

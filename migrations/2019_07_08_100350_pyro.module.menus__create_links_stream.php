@@ -38,7 +38,13 @@ class PyroModuleMenusCreateLinksStream extends Migration
         'class',
         'parent',
         'allowed_roles',
-        'icon'
+        'icon',
+        'hash' => [
+            'placeholder' => 'enterYourHash'
+        ],
+        'querystring' => [
+            'placeholder' => 'enter=your&querystring=1'
+        ]
     ];
 
 

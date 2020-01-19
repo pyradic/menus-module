@@ -3,7 +3,9 @@
     "type": "streams-addon",
     "description": "",
     "require": {
-        "ssnepenthe/color-utils": "~0.4"
+        "ssnepenthe/color-utils": "~0.4",
+        "league/uri": "~6.0",
+        "league/uri-components": "~2.0"
     },
     "autoload": {
         "psr-4": {

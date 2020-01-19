@@ -7,6 +7,7 @@ use Pyro\MenusModule\Menu\Contract\MenuInterface;
 /**
  * \Pyro\MenusModule\Link\Contract\LinkRepositoryInterface
  *
+ * @mixin \Pyro\MenusModule\Link\LinkRepository
  */
 interface LinkRepositoryInterface extends EntryRepositoryInterface
 {

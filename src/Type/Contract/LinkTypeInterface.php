@@ -1,6 +1,7 @@
 <?php namespace Pyro\MenusModule\Type\Contract;
 
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
+use League\Uri\Uri;
 use Pyro\MenusModule\Link\Contract\LinkInterface;
 
 interface LinkTypeInterface

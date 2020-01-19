@@ -1,6 +1,6 @@
 <?php
 
-namespace Pyro\MenusModule\Seeder;
+namespace Pyro\MenusModule;
 
 use Anomaly\Streams\Platform\Entry\EntryRepository;
 use Pyro\CpActionLinkTypeExtension\CpActionLinkTypeModel;

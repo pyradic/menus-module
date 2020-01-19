@@ -3,14 +3,21 @@
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryCollection;
 use Anomaly\Streams\Platform\Model\Menus\MenusLinksEntryModel;
+use Illuminate\Support\Str;
+use League\Uri\Contracts\UriInterface;
+use League\Uri\Exceptions\SyntaxError;
+use League\Uri\Uri;
+use League\Uri\UriModifier;
 use Pyro\MenusModule\Link\Contract\LinkInterface;
 use Pyro\MenusModule\Menu\Contract\MenuInterface;
 use Pyro\MenusModule\Type\Contract\LinkTypeInterface;
+use Pyro\MenusModule\Uri\UriValidator;
 
 /**
  * \Pyro\MenusModule\Link\LinkModel
  *
  */
+
 /**
  * Pyro\MenusModule\Link\LinkModel
  *
@@ -29,6 +36,8 @@ use Pyro\MenusModule\Type\Contract\LinkTypeInterface;
  * @property string|null $class
  * @property int|null $parent_id
  * @property string|null $icon
+ * @property string|null $hash
+ * @property string|null $querystring
  * @property \Pyro\ActivityLogModule\Activity\ActivityCollection|\Pyro\ActivityLogModule\Activity\ActivityModel[] $actions
  * @property int|null $actions_count
  * @property \Pyro\ActivityLogModule\Activity\ActivityCollection|\Pyro\ActivityLogModule\Activity\ActivityModel[] $activityLogs
@@ -38,13 +47,13 @@ use Pyro\MenusModule\Type\Contract\LinkTypeInterface;
  * @property \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\LinkModel[] $children
  * @property int|null $children_count
  * @property \Anomaly\UsersModule\User\UserModel|null $createdBy
- * @property \Pyro\MenusModule\Link\LinkModel $entry
  * @property mixed|null $raw
  * @property \Pyro\MenusModule\Menu\MenuModel $menu
  * @property \Pyro\MenusModule\Link\LinkModel|null $parent
  * @property \Anomaly\UsersModule\User\UserModel|null $updatedBy
  * @property \Anomaly\Streams\Platform\Version\VersionCollection|\Anomaly\Streams\Platform\Version\VersionModel[] $versions
  * @property int|null $versions_count
+ * @property mixed $entry
  * @property \Anomaly\UsersModule\Role\RoleModel $allowed_roles
  * @method static \Pyro\MenusModule\Link\LinkModel make($attributes=[])
  * @method static \Anomaly\Streams\Platform\Entry\EntryQueryBuilder|\Pyro\MenusModule\Link\LinkModel newModelQuery()
@@ -58,12 +67,15 @@ use Pyro\MenusModule\Type\Contract\LinkTypeInterface;
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereCreatedById($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereEntry($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereEntryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereEntryType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereHash($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereIcon($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereMenuId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereQuerystring($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereSortOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereTarget($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereType($value)
@@ -148,13 +160,23 @@ class LinkModel extends MenusLinksEntryModel implements LinkInterface
     {
         $type = $this->getType();
 
-        if (!$type) {
+        if ( ! $type) {
             return null;
         }
+        $url = $type->url($this);
+        try {
+            $uri = Uri::createFromString($url);
+            $uri = UriModifier::mergeQuery($uri, $this->getQuerystring());
+            if ($hash = $this->getHash()) {
+                $uri = $uri->withFragment($hash);
+            }
 
-        return $type->url($this);
+            $url = UriValidator::validate($uri) ? $uri->__toString() : $url;
+        } catch(\Throwable $e){
+
+        }
+        return $url;
     }
-
     /**
      * Get the title.
      *
@@ -164,7 +186,7 @@ class LinkModel extends MenusLinksEntryModel implements LinkInterface
     {
         $type = $this->getType();
 
-        if (!$type) {
+        if ( ! $type) {
             return null;
         }
 
@@ -180,7 +202,7 @@ class LinkModel extends MenusLinksEntryModel implements LinkInterface
     {
         $type = $this->getType();
 
-        if (!$type) {
+        if ( ! $type) {
             return null;
         }
 
@@ -196,11 +218,21 @@ class LinkModel extends MenusLinksEntryModel implements LinkInterface
     {
         $type = $this->getType();
 
-        if (!$type) {
+        if ( ! $type) {
             return null;
         }
 
         return $type->enabled($this);
+    }
+
+    public function getQuerystring()
+    {
+        return $this->querystring;
+    }
+
+    public function getHash()
+    {
+        return $this->hash;
     }
 
     /**
@@ -267,6 +299,7 @@ class LinkModel extends MenusLinksEntryModel implements LinkInterface
      * Set the parent ID.
      *
      * @param $id
+     *
      * @return $this
      */
     public function setParentId($id)
@@ -312,6 +345,7 @@ class LinkModel extends MenusLinksEntryModel implements LinkInterface
      * Set the active flag.
      *
      * @param $true
+     *
      * @return $this
      */
     public function setActive($active)
@@ -335,6 +369,7 @@ class LinkModel extends MenusLinksEntryModel implements LinkInterface
      * Set the current flag.
      *
      * @param $true
+     *
      * @return $this
      */
     public function setCurrent($current)
@@ -378,9 +413,19 @@ class LinkModel extends MenusLinksEntryModel implements LinkInterface
     {
         $array = parent::toArray();
 
-        $array['url']   = $this->getUrl();
-        $array['title'] = $this->getTitle();
+        $array[ 'url' ]   = $this->getUrl();
+        $array[ 'title' ] = $this->getTitle();
 
         return $array;
+    }
+
+    public function setQuerystringAttribute($querystring)
+    {
+        $this->attributes['querystring'] = Str::startsWith($querystring, '?') ? Str::replaceFirst('?','',$querystring) : $querystring;
+    }
+
+    public function setHashAttribute($hash)
+    {
+        $this->attributes['hash'] = Str::startsWith($hash, '#') ? Str::replaceFirst('#', '',$hash) : $hash;
     }
 }
