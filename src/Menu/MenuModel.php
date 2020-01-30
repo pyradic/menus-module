@@ -29,12 +29,14 @@ use Pyro\MenusModule\Menu\Contract\MenuInterface;
  * @property \Anomaly\UsersModule\Role\RoleCollection|\Anomaly\UsersModule\Role\RoleModel[] $allowedRoles
  * @property int|null $allowed_roles_count
  * @property \Anomaly\UsersModule\User\UserModel|null $createdBy
+ * @property \Anomaly\UsersModule\User\UserModel|null $created_by
  * @property mixed|null $raw
  * @property \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\LinkModel[] $links
  * @property int|null $links_count
  * @property \Anomaly\Streams\Platform\Model\EloquentCollection|\Anomaly\Streams\Platform\Model\Menus\MenusMenusEntryTranslationsModel[] $translations
  * @property int|null $translations_count
  * @property \Anomaly\UsersModule\User\UserModel|null $updatedBy
+ * @property \Anomaly\UsersModule\User\UserModel|null $updated_by
  * @property \Anomaly\Streams\Platform\Version\VersionCollection|\Anomaly\Streams\Platform\Version\VersionModel[] $versions
  * @property int|null $versions_count
  * @property string $name

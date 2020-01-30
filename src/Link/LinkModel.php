@@ -47,10 +47,12 @@ use Pyro\MenusModule\Uri\UriValidator;
  * @property \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\LinkModel[] $children
  * @property int|null $children_count
  * @property \Anomaly\UsersModule\User\UserModel|null $createdBy
+ * @property \Anomaly\UsersModule\User\UserModel|null $created_by
  * @property mixed|null $raw
  * @property \Pyro\MenusModule\Menu\MenuModel $menu
  * @property \Pyro\MenusModule\Link\LinkModel|null $parent
  * @property \Anomaly\UsersModule\User\UserModel|null $updatedBy
+ * @property \Anomaly\UsersModule\User\UserModel|null $updated_by
  * @property \Anomaly\Streams\Platform\Version\VersionCollection|\Anomaly\Streams\Platform\Version\VersionModel[] $versions
  * @property int|null $versions_count
  * @property mixed $entry
