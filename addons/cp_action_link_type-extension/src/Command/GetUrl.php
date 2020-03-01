@@ -32,10 +32,6 @@ class GetUrl
     public function handle(Parser $parser)
     {
         $action = dispatch_now(new GetOptionAction($this->entry->key));
-        $url = data_get($action, 'url');
-        if($url === null){
-            $url = data_get($action, 'attributes.href');
-        }
-        return $url;
+        return $action ? $action->getUrl() : $action;
     }
 }

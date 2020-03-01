@@ -6,6 +6,7 @@ use Pyro\MenusModule\Type\LinkTypeExtension;
 use Pyro\ModuleLinkTypeExtension\Command\GetUrl;
 use Pyro\ModuleLinkTypeExtension\Form\ModuleLinkTypeFormBuilder;
 use Pyro\Platform\Ui\ControlPanel\Command\BuildControlPanelStructure;
+use Pyro\Platform\Ui\ControlPanel\Command\TransformControlPanelNavigation;
 
 class ModuleLinkTypeExtension extends LinkTypeExtension
 {
@@ -32,14 +33,14 @@ class ModuleLinkTypeExtension extends LinkTypeExtension
     public function info(LinkInterface $link)
     {
         $key = $link->getEntry()->key;
-        /** @var \Pyro\Platform\Ui\ControlPanel\ControlPanelStructure $structure */
-        $structure  = $this->dispatchNow(new BuildControlPanelStructure());
-        $navigation = $structure->getNavigation($key);
-        $section    = $structure->getSection($key);
-
-        $navigation[ 'title' ] = trans($navigation[ 'title' ] ?? '');
-        $section[ 'title' ] = trans($section[ 'title' ] ?? '');
-        return "{$navigation['title']}/{$section['title']}";
+        /** @var \Pyro\Platform\Ui\ControlPanel\Component\NavigationNode $nav */
+        $nav = dispatch_now(new TransformControlPanelNavigation());
+        $nodes = $nav->getAllDescendants()->sections();
+        $i = $nodes->search(function($node) use ($key ){
+            return $node->getKey() === $key;
+        });
+        $node = $nodes[$i];
+        return trans($node->getTitle()) . '/' . trans($node->getParent()->getTitle());
     }
 
     /**

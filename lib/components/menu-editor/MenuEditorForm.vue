@@ -8,9 +8,10 @@
 </template>
 
 <script lang="ts">
-    import $ from 'jquery'
+    import $                              from 'jquery'
     import { Component, component, prop } from '@pyro/platform';
-    import { AxiosResponse } from 'axios'
+    import { AxiosResponse }              from 'axios'
+    import Vue                            from 'vue';
 
     export interface AjaxFormData {
         data: {
@@ -110,6 +111,11 @@
             // this.formStyle             = document.createElement('style');
             // this.formStyle.textContent = res.data.css;
             // document.head.append(this.formStyle)
+
+            // const { render, staticRenderFns } = Vue.compile(`<span>${res.data.data.form}</span>`);
+            // let node                          = new Vue({ render, staticRenderFns });
+            // node.$mount(this.$el);
+            // return node;
 
             $(this.$el).html(res.data.data.form);
             // let $scripts = $(res.data.data.scripts)
