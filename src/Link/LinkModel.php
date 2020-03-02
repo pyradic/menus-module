@@ -84,6 +84,7 @@ use Pyro\MenusModule\Uri\UriValidator;
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereUpdatedById($value)
  * @mixin \Eloquent
+ * @method \Pyro\MenusModule\Link\LinkPresenter getPresenter()
  */
 class LinkModel extends MenusLinksEntryModel implements LinkInterface
 {

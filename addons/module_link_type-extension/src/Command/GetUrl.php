@@ -32,6 +32,6 @@ class GetUrl
     public function handle(Parser $parser)
     {
         $action = dispatch_now(new GetOptionAction($this->entry->key));
-        return $action->getUrl();
+        return $action ? $action->getUrl() : '';
     }
 }

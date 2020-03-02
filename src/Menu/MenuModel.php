@@ -61,6 +61,7 @@ use Pyro\MenusModule\Menu\Contract\MenuInterface;
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereUpdatedById($value)
  * @mixin \Eloquent
+ * @method \Anomaly\Streams\Platform\Entry\EntryPresenter getPresenter()
  */
 class MenuModel extends MenusMenusEntryModel implements MenuInterface
 {
