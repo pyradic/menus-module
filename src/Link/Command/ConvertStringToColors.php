@@ -16,24 +16,36 @@ class ConvertStringToColors
     /** @var string */
     protected $string;
 
-    public function __construct(string $string)
+    /** @var string */
+    protected $baseColor;
+
+    public function __construct(string $string, string $baseColor = null)
     {
         $this->string = $string;
+        $this->baseColor = $baseColor;
     }
 
     public function handle()
     {
         if ( ! array_key_exists($this->string, static::$colorcache)) {
-            $colorCode = $this->stringToColorCode($this->string);
-            $color     = color($colorCode);
+            $isCustomColor= $this->baseColor !== null;
+            if($isCustomColor) {
+                $color     = color($this->baseColor);
+            } else {
+                $colorCode = $this->stringToColorCode($this->string);
+                $color     = color($colorCode);
+            }
             $hsl       = $color->getHsl();
             $lightness = (int)$hsl->getLightness();
 
-            $treshold        = 30;
-            $requiresDarking = $hsl->isLight(100 - $treshold);
-            if ($requiresDarking) {
-                $lightness -= $treshold;
-                $color     = $color->with([ 'lightness' => $lightness ]);
+            // custom defined colors will not be subjected to extra darkening
+            if(!$isCustomColor) {
+                $treshold        = 40;
+                $requiresDarking = $hsl->isLight(100 - $treshold);
+                if ($requiresDarking) {
+                    $lightness -= $treshold;
+                    $color     = $color->with([ 'lightness' => $lightness ]);
+                }
             }
 
             $darker  = $color->with([ 'lightness' => $lightness - 10 ]);

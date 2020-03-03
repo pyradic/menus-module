@@ -2,8 +2,8 @@
 
 namespace Pyro\ModuleLinkTypeExtension\Command;
 
-use Pyro\Platform\Ui\ControlPanel\Command\BuildControlPanelStructure;
 use Pyro\Platform\Ui\ControlPanel\Command\TransformControlPanelNavigation;
+use Pyro\Platform\Ui\ControlPanel\Component\Button;
 
 class GetOptionAction
 {
@@ -18,10 +18,9 @@ class GetOptionAction
     {
         foreach($this->getFlattened() as $node){
             if($node->getKey() === $this->key){
-                return $node->getValue();
+                return $node;
             }
         }
-//        return $this->getFlattened()->firstWhere('key', $this->key);
     }
 
     /** @return \Illuminate\Support\Collection */
@@ -29,8 +28,11 @@ class GetOptionAction
     {
         /** @var \Pyro\Platform\Ui\ControlPanel\Component\NavigationNode $node */
         $node = dispatch_now(new TransformControlPanelNavigation());
-        /** @var \Illuminate\Support\Collection $sections */
-        $sections = $node->getChildren()->map->getChildren()->flatten(1);
-        return $sections; //$sections->merge($buttons);
+        $sections = $node->getAllDescendants()->sections()->map->getValue();
+        $buttons = $sections->map->getButtons()->flatten(1)->filter(function($button){
+            return $button instanceof Button;
+        });
+
+        return $sections->merge($buttons);
     }
 }

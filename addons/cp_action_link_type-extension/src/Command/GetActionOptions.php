@@ -15,9 +15,21 @@ class GetActionOptions
             $title             = trans($nav->getTitle());
             $options[ $title ] = [];
             foreach ($nav->getChildren() as $section) {
-//                $title             = trans($nav[ 'title' ]) . ' > ' . trans($section[ 'title' ]);
+                $options[ $title ][ $section->getKey() ] = $title . ' :: ' . trans($section->getTitle());
+
                 foreach ($section->getButtons() as $button) {
-                    $options[ $title ][ $button->getKey() ] = trans($section->getTitle()) . ' > ' . trans($button->getTitle());
+                    $options[ $title ][ $button->getKey() ] = $title . ' :: ' . trans($section->getTitle()) . ' > ' . trans($button->getTitle());
+                }
+                if ($section->hasChildren()) {
+                    foreach ($section->getChildren() as $child) {
+                        $options[ $title ][ $child->getKey() ] = $title . ' :: ' . trans($section->getTitle()) . ' :: ' . trans($child->getTitle());
+
+                        foreach ($child->getButtons() as $button) {
+                            $options[ $title ][ $button->getKey() ] = $title . ' :: ' . trans($section->getTitle()) . ' :: ' . trans($child->getTitle()) . ' > ' . trans($button->getTitle());
+                        }
+                    }
+                } else {
+                    $options[ $title ][ $section->getKey() ] = $title . ' :: ' . trans($section->getTitle());
                 }
             }
             if (count($options[ $title ]) === 0) {

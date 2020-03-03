@@ -9,6 +9,16 @@ use Pyro\MenusModule\Link\Contract\LinkInterface;
  *
  * @mixin \Pyro\MenusModule\Link\LinkModel
  * @property \Pyro\MenusModule\Link\LinkModel $object
+ * @property \Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter $menu
+ * @property \Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter $type
+ * @property \Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter $entry
+ * @property \Anomaly\SelectFieldType\SelectFieldTypePresenter $target
+ * @property \Anomaly\TextFieldType\TextFieldTypePresenter $class
+ * @property \Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter $parent
+ * @property \Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter $allowed_roles
+ * @property \Anomaly\IconFieldType\IconFieldTypePresenter $icon
+ * @property \Anomaly\TextFieldType\TextFieldTypePresenter $hash
+ * @property \Anomaly\TextFieldType\TextFieldTypePresenter $querystring
  */
 class LinkPresenter extends EntryPresenter
 {

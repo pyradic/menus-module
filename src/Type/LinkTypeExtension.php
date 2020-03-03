@@ -69,6 +69,11 @@ class LinkTypeExtension extends Extension implements LinkTypeInterface
         return false;
     }
 
+    public function color()
+    {
+        return null;
+    }
+
 
     public function view()
     {

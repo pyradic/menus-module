@@ -8,7 +8,6 @@ class GetActionOptions
 {
     public function handle()
     {
-
         /** @var \Pyro\Platform\Ui\ControlPanel\Component\NavigationNode $node */
         $node    = dispatch_now(new TransformControlPanelNavigation());
         $options = [];
@@ -16,25 +15,22 @@ class GetActionOptions
             $title             = trans($nav->getTitle());
             $options[ $title ] = [];
             foreach ($nav->getChildren() as $section) {
-                $options[ $title ][ $section->getKey() ] = trans($section->getTitle());
-            }
-            if (count($options[ $title ]) === 0) {
-                unset($options[ $title ]);
-            }
-        }
-        return $options;
-    }
+                $options[ $title ][ $section->getKey() ] = $title . ' :: ' . trans($section->getTitle());
 
-    public function handle2()
-    {
-        /** @var array $structure = \Pyro\AdminTheme\Command\GetRecursiveControlPanelStructure::example() */
-        $structure = dispatch_now(new BuildControlPanelStructure());
-        $options   = [];
-        foreach ($structure as $nav) {
-            $title             = $nav[ 'title' ];
-            $options[ $title ] = [];
-            foreach ($nav[ 'children' ] as $section) {
-                $options[ $title ][ $section[ 'key' ] ] = $section[ 'title' ];
+                foreach ($section->getButtons() as $button) {
+                    $options[ $title ][ $button->getKey() ] = $title . ' :: ' . trans($section->getTitle()) . ' > ' . trans($button->getTitle());
+                }
+                if ($section->hasChildren()) {
+                    foreach ($section->getChildren() as $child) {
+                        $options[ $title ][ $child->getKey() ] = $title . ' :: ' . trans($section->getTitle()) . ' :: ' . trans($child->getTitle());
+
+                        foreach ($child->getButtons() as $button) {
+                            $options[ $title ][ $button->getKey() ] = $title . ' :: ' . trans($section->getTitle()) . ' :: ' . trans($child->getTitle()) . ' > ' . trans($button->getTitle());
+                        }
+                    }
+                } else {
+                    $options[ $title ][ $section->getKey() ] = $title . ' :: ' . trans($section->getTitle());
+                }
             }
             if (count($options[ $title ]) === 0) {
                 unset($options[ $title ]);

@@ -3,10 +3,12 @@
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 use Pyro\MenusModule\Link\Contract\LinkInterface;
 use Pyro\MenusModule\Type\LinkTypeExtension;
+use Pyro\ModuleLinkTypeExtension\Command\GetActionOptions;
 use Pyro\ModuleLinkTypeExtension\Command\GetUrl;
 use Pyro\ModuleLinkTypeExtension\Form\ModuleLinkTypeFormBuilder;
 use Pyro\Platform\Ui\ControlPanel\Command\BuildControlPanelStructure;
 use Pyro\Platform\Ui\ControlPanel\Command\TransformControlPanelNavigation;
+use Pyro\Platform\Ui\ControlPanel\Component\Button;
 
 class ModuleLinkTypeExtension extends LinkTypeExtension
 {
@@ -33,14 +35,18 @@ class ModuleLinkTypeExtension extends LinkTypeExtension
     public function info(LinkInterface $link)
     {
         $key = $link->getEntry()->key;
-        /** @var \Pyro\Platform\Ui\ControlPanel\Component\NavigationNode $nav */
-        $nav = dispatch_now(new TransformControlPanelNavigation());
-        $nodes = $nav->getAllDescendants()->sections();
-        $i = $nodes->search(function($node) use ($key ){
-            return $node->getKey() === $key;
-        });
-        $node = $nodes[$i];
-        return trans($node->getTitle()) . '/' . trans($node->getParent()->getTitle());
+        $options = dispatch_now(new         GetActionOptions());
+        foreach($options as $title => $option){
+            if(array_key_exists($key, $option)){
+                return $option[$key];
+            }
+        }
+            return $link->getEntryTitle();
+    }
+
+    public function color()
+    {
+        return '#607d8b';
     }
 
     /**

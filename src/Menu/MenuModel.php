@@ -62,6 +62,9 @@ use Pyro\MenusModule\Menu\Contract\MenuInterface;
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Menu\MenuModel whereUpdatedById($value)
  * @mixin \Eloquent
  * @method \Anomaly\Streams\Platform\Entry\EntryPresenter getPresenter()
+ * @method \Anomaly\Streams\Platform\Entry\EntryCollection newCollection()
+ * @method \Anomaly\Streams\Platform\Entry\EntryRouter newRouter()
+ * @method \Anomaly\Streams\Platform\Entry\EntryQueryBuilder newEloquentBuilder()
  */
 class MenuModel extends MenusMenusEntryModel implements MenuInterface
 {

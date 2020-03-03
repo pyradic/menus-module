@@ -30,13 +30,9 @@ class GetOptionAction
     {
         /** @var \Pyro\Platform\Ui\ControlPanel\Component\NavigationNode $node */
         $node = dispatch_now(new TransformControlPanelNavigation());
-        /** @var \Illuminate\Support\Collection $sections */
-        $sections = $node->getChildren()->toBase()->map->getChildren()->flatten(1);
-        /** @var \Illuminate\Support\Collection $buttons */
-        $buttons = $sections->map->getButtons()->flatten(1);
+        $buttons = $node->getAllDescendants()->sections()->map->getButtons()->flatten(1);
         return $buttons->filter(function($button){
             return $button instanceof Button;
         });
-        return $buttons; //$sections->merge($buttons);
     }
 }

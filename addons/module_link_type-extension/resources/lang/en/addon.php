@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title'       => 'Module Section',
+    'title'       => 'Module',
     'name'        => 'Module Menu Type Extension',
-    'description' => 'A link pointing to a module section'
+    'description' => 'A link pointing to a section, subsection or button action of modules'
 ];

@@ -42,7 +42,7 @@ class LinkTreeSegments
                         $ancronym   = Str::ancronym($title);
                         $tooltip = '';
                         /** @var array $converted = \Pyro\MenusModule\Link\Command\ConvertStringToColors::returnCompletion() */
-                        $converted    = $this->dispatchNow(new ConvertStringToColors($type->getTitle()));
+                        $converted    = $this->dispatchNow(new ConvertStringToColors($type->getTitle(), $type->color()));
                         $color        = $converted[ 'color' ];
                         $darkerColor  = $converted[ 'darker' ];
                         $lighterColor = $converted[ 'lighter' ];
