@@ -48,6 +48,7 @@ use Pyro\MenusModule\Uri\UriValidator;
  * @property int|null $children_count
  * @property \Anomaly\UsersModule\User\UserModel|null $createdBy
  * @property \Anomaly\UsersModule\User\UserModel|null $created_by
+ * @property \Pyro\MenusModule\Link\LinkModel $entry
  * @property mixed|null $raw
  * @property \Pyro\MenusModule\Menu\MenuModel $menu
  * @property \Pyro\MenusModule\Link\LinkModel|null $parent
@@ -55,7 +56,6 @@ use Pyro\MenusModule\Uri\UriValidator;
  * @property \Anomaly\UsersModule\User\UserModel|null $updated_by
  * @property \Anomaly\Streams\Platform\Version\VersionCollection|\Anomaly\Streams\Platform\Version\VersionModel[] $versions
  * @property int|null $versions_count
- * @property mixed $entry
  * @property \Anomaly\UsersModule\Role\RoleModel $allowed_roles
  * @method static \Pyro\MenusModule\Link\LinkModel make($attributes=[])
  * @method static \Anomaly\Streams\Platform\Entry\EntryQueryBuilder|\Pyro\MenusModule\Link\LinkModel newModelQuery()
@@ -69,7 +69,6 @@ use Pyro\MenusModule\Uri\UriValidator;
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereCreatedById($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereEntry($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereEntryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereEntryType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereHash($value)

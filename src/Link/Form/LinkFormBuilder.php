@@ -8,9 +8,12 @@ use Pyro\MenusModule\Type\LinkTypeExtension;
 /**
  * Class LinkFormBuilder
  *
- * @link   http://pyrocms.com/
+ * @link http://pyrocms.com/
  * @author PyroCMS, Inc. <support@pyrocms.com>
  * @author Ryan Thompson <ryan@pyrocms.com>
+ * @method \Pyro\MenusModule\Link\Contract\LinkInterface getFormEntry()
+ * @method \Pyro\MenusModule\Link\LinkModel getFormModelName()
+ * @method \Pyro\MenusModule\Link\LinkModel getFormModel()
  */
 class LinkFormBuilder extends FormBuilder
 {
