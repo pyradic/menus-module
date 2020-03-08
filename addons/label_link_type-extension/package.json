@@ -1,0 +1,19 @@
+{
+    "name": "@pyro/label_link_type-extension",
+    "version": "1.0.0",
+    "main": "lib/index.ts",
+    "typings": "lib/index.ts",
+    "types": "lib/index.ts",
+    "pyro": {
+        "srcPath": "lib",
+        "entrypoints": [
+            {"path": "index.ts", "provider": "LabelLinkTypeExtensionServiceProvider", "autoload": true}
+        ]
+    },
+    "dependencies": {
+        "@pyro/platform": "^1.0.0",
+        "@pyro/admin-theme": "^1.0.0"
+    },
+    "devDependencies": {
+    }
+}

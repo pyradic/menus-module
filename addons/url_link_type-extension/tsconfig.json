@@ -1,0 +1,16 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "baseUrl": ".",
+        "typeRoots": [
+            "../../../../node_modules/@types"
+        ]
+    },
+    "include": [
+        "lib"
+    ],
+    "exclude": [
+        "node_modules",
+        "../../../../packages/pyro/platform/lib"
+    ]
+}
