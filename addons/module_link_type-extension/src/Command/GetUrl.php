@@ -13,6 +13,8 @@ class GetUrl
      */
     protected $entry;
 
+    protected static $resolvedEntries = [];
+
     /**
      * Create a new GetUrl instance.
      *
@@ -31,7 +33,10 @@ class GetUrl
      */
     public function handle(Parser $parser)
     {
+        if(array_key_exists($this->entry->id, static::$resolvedEntries)){
+            return static::$resolvedEntries[$this->entry->id];
+        }
         $action = dispatch_now(new GetOptionAction($this->entry->key));
-        return $action ? $action->getUrl() : '';
+        return static::$resolvedEntries[$this->entry->id] = $action ? $action->getUrl() : '';
     }
 }

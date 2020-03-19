@@ -16,11 +16,7 @@ class GetOptionAction
 
     public function handle()
     {
-        foreach($this->getFlattened() as $node){
-            if($node->getKey() === $this->key){
-                return $node;
-            }
-        }
+        return $this->getFlattened()->get($this->key);
     }
 
     /** @return \Illuminate\Support\Collection */
@@ -33,6 +29,6 @@ class GetOptionAction
             return $button instanceof Button;
         });
 
-        return $sections->merge($buttons);
+        return $sections->merge($buttons)->keyBy->getKey();
     }
 }
