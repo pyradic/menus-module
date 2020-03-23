@@ -23,11 +23,11 @@ use Pyro\MenusModule\Uri\UriValidator;
  *
  * @property int $id
  * @property int|null $sort_order
- * @property \Illuminate\Support\Carbon $created_at
+ * @property mixed $created_at
  * @property int|null $created_by_id
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property mixed $updated_at
  * @property int|null $updated_by_id
- * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property mixed $deleted_at
  * @property int $menu_id
  * @property \Pyro\MenusModule\Type\LinkTypeExtension $type
  * @property int $entry_id

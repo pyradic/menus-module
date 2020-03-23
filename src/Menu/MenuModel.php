@@ -16,11 +16,11 @@ use Pyro\MenusModule\Menu\Contract\MenuInterface;
  *
  * @property int $id
  * @property int|null $sort_order
- * @property \Illuminate\Support\Carbon $created_at
+ * @property mixed $created_at
  * @property int|null $created_by_id
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property mixed $updated_at
  * @property int|null $updated_by_id
- * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property mixed $deleted_at
  * @property string $slug
  * @property \Pyro\ActivityLogModule\Activity\ActivityCollection|\Pyro\ActivityLogModule\Activity\ActivityModel[] $actions
  * @property int|null $actions_count
