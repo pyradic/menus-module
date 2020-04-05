@@ -7,8 +7,9 @@ use Pyro\MenusModule\Link\Contract\LinkInterface;
 /**
  * \Pyro\MenusModule\Link\LinkPresenter
  *
- * @mixin \Pyro\MenusModule\Link\LinkModel
  * @property \Pyro\MenusModule\Link\LinkModel $object
+ * @method \Pyro\MenusModule\Link\LinkModel getObject()
+ * @mixin \Pyro\MenusModule\Link\LinkModel
  * @property \Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter $menu
  * @property \Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter $type
  * @property \Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter $entry
