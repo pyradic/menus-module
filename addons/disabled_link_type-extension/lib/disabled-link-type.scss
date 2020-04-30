@@ -1,0 +1,18 @@
+@import "~@pyro/admin-theme/lib/styling/base";
+
+
+.#{$menu-item-prefix} {
+
+    $self     : &;
+
+    $content  : #{$menu-item-prefix}__content;
+
+    &--pyro_extension_disabled_link_type {
+        .#{$content} {
+
+            padding : var(--menu-item-padding-y) 20px var(--menu-item-padding-y) 5px;
+            text-decoration: line-through;
+
+        }
+    }
+}

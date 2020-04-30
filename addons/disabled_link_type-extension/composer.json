@@ -1,0 +1,10 @@
+{
+    "name": "pyro/disabled_link_type-extension",
+    "type": "streams-addon",
+    "description": "",
+    "autoload": {
+        "psr-4": {
+            "Pyro\\DisabledLinkTypeExtension\\": "src/"
+        }
+    }
+}

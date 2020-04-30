@@ -4,6 +4,7 @@ namespace Pyro\MenusModule;
 
 use Anomaly\Streams\Platform\Entry\EntryRepository;
 use Pyro\CpActionLinkTypeExtension\CpActionLinkTypeModel;
+use Pyro\DisabledLinkTypeExtension\DisabledLinkTypeModel;
 use Pyro\DividerLinkTypeExtension\DividerLinkTypeModel;
 use Pyro\HeaderLinkTypeExtension\HeaderLinkTypeModel;
 use Pyro\LabelLinkTypeExtension\LabelLinkTypeModel;
@@ -116,6 +117,12 @@ class MenuModuleSeederHelper extends SeederHelper
     public function module($title = null, array $entryData = [], array $linkData = [])
     {
         $this->model(ModuleLinkTypeModel::class);
+        return $this->createLink($title, $entryData, $linkData);
+    }
+
+    public function disabled($title = null, array $entryData = [], array $linkData = [])
+    {
+        $this->model(DisabledLinkTypeModel::class);
         return $this->createLink($title, $entryData, $linkData);
     }
 

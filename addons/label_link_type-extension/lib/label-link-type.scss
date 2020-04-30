@@ -1,0 +1,17 @@
+@import "~@pyro/admin-theme/lib/styling/base";
+
+
+.#{$menu-item-prefix} {
+
+    $self     : &;
+
+    $content  : #{$menu-item-prefix}__content;
+
+    &--pyro_extension_label_link_type {
+        .#{$content} {
+
+            padding : var(--menu-item-padding-y) 20px var(--menu-item-padding-y) 5px;
+            cursor  : pointer;
+        }
+    }
+}

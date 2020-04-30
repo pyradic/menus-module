@@ -15,6 +15,7 @@
             "Pyro\\LabelLinkTypeExtension\\": "addons/label_link_type-extension/src",
             "Pyro\\ModuleLinkTypeExtension\\": "addons/module_link_type-extension/src",
             "Pyro\\UrlLinkTypeExtension\\": "addons/url_link_type-extension/src",
+            "Pyro\\DisabledLinkTypeExtension\\": "addons/disabled_link_type-extension/src",
             "Pyro\\CpActionLinkTypeExtension\\": "addons/cp_action_link_type-extension/src"
         }
     },
