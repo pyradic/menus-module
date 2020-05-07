@@ -20,6 +20,7 @@ use Pyro\MenusModule\Link\Contract\LinkInterface;
  * @property \Anomaly\IconFieldType\IconFieldTypePresenter $icon
  * @property \Anomaly\TextFieldType\TextFieldTypePresenter $hash
  * @property \Anomaly\TextFieldType\TextFieldTypePresenter $querystring
+ * @property \Anomaly\SliderFieldType\SliderFieldTypePresenter $sdf
  */
 class LinkPresenter extends EntryPresenter
 {

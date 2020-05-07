@@ -38,6 +38,7 @@ use Pyro\MenusModule\Uri\UriValidator;
  * @property string|null $icon
  * @property string|null $hash
  * @property string|null $querystring
+ * @property string|null $sdf
  * @property \Pyro\ActivityLogModule\Activity\ActivityCollection|\Pyro\ActivityLogModule\Activity\ActivityModel[] $actions
  * @property int|null $actions_count
  * @property \Pyro\ActivityLogModule\Activity\ActivityCollection|\Pyro\ActivityLogModule\Activity\ActivityModel[] $activityLogs
@@ -78,6 +79,7 @@ use Pyro\MenusModule\Uri\UriValidator;
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereMenuId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereParentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereQuerystring($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereSdf($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereSortOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereTarget($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereType($value)
