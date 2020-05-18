@@ -23,21 +23,21 @@ class LinkFormBuilder extends FormBuilder
      *
      * @var null|LinkTypeExtension
      */
-    protected $type = null;
+    protected $type;
 
     /**
      * The related menu.
      *
      * @var null|MenuInterface
      */
-    protected $menu = null;
+    protected $menu;
 
     /**
      * The parent link.
      *
      * @var null|LinkInterface
      */
-    protected $parent = null;
+    protected $parent;
 
     /**
      * The skipped fields.
@@ -51,6 +51,15 @@ class LinkFormBuilder extends FormBuilder
         'menu',
     ];
 
+    protected $fields = [
+        '*',
+        'allowed_roles' => [
+            'config' => [
+                'mode' => 'tags'
+            ]
+        ]
+    ];
+
     /**
      * Fired when the builder is ready to build.
      *
@@ -58,13 +67,18 @@ class LinkFormBuilder extends FormBuilder
      */
     public function onReady()
     {
-        if (!$this->getType() && !$this->getEntry()) {
+        if ( ! $this->getType() && ! $this->getEntry()) {
             throw new \Exception('The $type parameter is required when creating a link.');
         }
 
-        if (!$this->getMenu() && !$this->getEntry()) {
+        if ( ! $this->getMenu() && ! $this->getEntry()) {
             throw new \Exception('The $menu parameter is required when creating a link.');
         }
+
+        $this->on('built', function(){
+            $fields=$this->getFormFields();
+            return;
+        });
     }
 
     /**
@@ -75,7 +89,7 @@ class LinkFormBuilder extends FormBuilder
         $parent = $this->getParent();
         $entry  = $this->getFormEntry();
 
-        if (!$entry->menu_id && $menu = $this->getMenu()) {
+        if ( ! $entry->menu_id && $menu = $this->getMenu()) {
             $entry->menu_id = $menu->getId();
         }
 
@@ -101,7 +115,7 @@ class LinkFormBuilder extends FormBuilder
     /**
      * Set the type.
      *
-     * @param  LinkTypeExtension $type
+     * @param LinkTypeExtension $type
      *
      * @return $this
      */
@@ -126,6 +140,7 @@ class LinkFormBuilder extends FormBuilder
      * Set the menu.
      *
      * @param $menu
+     *
      * @return $this
      */
     public function setMenu(MenuInterface $menu)
@@ -148,7 +163,8 @@ class LinkFormBuilder extends FormBuilder
     /**
      * Set the parent link.
      *
-     * @param  LinkInterface $parent
+     * @param LinkInterface $parent
+     *
      * @return $this
      */
     public function setParent(LinkInterface $parent)

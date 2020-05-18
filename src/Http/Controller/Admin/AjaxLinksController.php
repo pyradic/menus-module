@@ -27,7 +27,7 @@ class AjaxLinksController extends AdminController
     public function __construct()
     {
         parent::__construct();
-        resolve(ViewOverrides::class)->put('anomaly.field_type.multiple::tags', 'pyro.module.menus::tags');
+//        resolve(ViewOverrides::class)->put('anomaly.field_type.multiple::tags', 'pyro.module.menus::tags');
     }
 
     public function index(MenuRepositoryInterface $menus, ExtensionCollection $extensions, $menu = null)

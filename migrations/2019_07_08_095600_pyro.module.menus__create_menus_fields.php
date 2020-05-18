@@ -41,6 +41,7 @@ class PyroModuleMenusCreateMenusFields extends Migration
             'type'   => 'anomaly.field_type.multiple',
             'config' => [
                 'related' => RoleModel::class,
+                'mode' => 'tags'
             ],
         ],
         'type'          => [

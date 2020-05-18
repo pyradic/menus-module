@@ -5,9 +5,11 @@ use Anomaly\Streams\Platform\Addon\AddonIntegrator;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
 use Anomaly\Streams\Platform\Model\Menus\MenusLinksEntryModel;
 use Anomaly\Streams\Platform\Model\Menus\MenusMenusEntryModel;
+use Anomaly\Streams\Platform\Support\Collection;
 use Anomaly\Streams\Platform\View\Event\TemplateDataIsLoading;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Str;
+use Pyro\MenusModule\Link\Command\GetLinks;
 use Pyro\MenusModule\Link\Contract\LinkRepositoryInterface;
 use Pyro\MenusModule\Link\LinkModel;
 use Pyro\MenusModule\Link\LinkRepository;
@@ -104,7 +106,8 @@ class MenusModuleServiceProvider extends AddonServiceProvider
                     });
 
                 $data = $this->app->platform->getData();
-                foreach ($nodes->map->toArray()->keyBy('slug') as $slug => $menu) {
+                $nodeArray = $nodes->map->toArray();
+                foreach ($nodeArray->keyBy('slug') as $slug => $menu) {
                     $data->set('menus.' . $slug, $menu);
                 }
             }
