@@ -84,6 +84,7 @@ class MenusModuleServiceProvider extends AddonServiceProvider
 //        $this->app->platform->addAddon($this->addon);
 
         $this->app->events->listen(TemplateDataIsLoading::class, function (TemplateDataIsLoading $event) {
+            \ServerTiming::start('templatedata:menus');
             $template = $event->getTemplate();
             /** @var \Anomaly\Streams\Platform\Ui\ControlPanel\ControlPanel $cp */
             $cp = $template->get('cp');
@@ -111,6 +112,7 @@ class MenusModuleServiceProvider extends AddonServiceProvider
                     $data->set('menus.' . $slug, $menu);
                 }
             }
+            \ServerTiming::stop('templatedata:menus');
         });
     }
 

@@ -26,8 +26,6 @@ use Pyro\MenusModule\Menu\Contract\MenuInterface;
  * @property int|null $actions_count
  * @property \Pyro\ActivityLogModule\Activity\ActivityCollection|\Pyro\ActivityLogModule\Activity\ActivityModel[] $activityLogs
  * @property int|null $activity_logs_count
- * @property \Anomaly\UsersModule\Role\RoleCollection|\Anomaly\UsersModule\Role\RoleModel[] $allowedRoles
- * @property int|null $allowed_roles_count
  * @property \Anomaly\UsersModule\User\UserModel|null $createdBy
  * @property \Anomaly\UsersModule\User\UserModel|null $created_by
  * @property mixed|null $raw
@@ -42,6 +40,8 @@ use Pyro\MenusModule\Menu\Contract\MenuInterface;
  * @property string $name
  * @property string $description
  * @property \Anomaly\UsersModule\Role\RoleModel $allowed_roles
+ * @method static \Anomaly\Streams\Platform\Entry\EntryCollection|static[] all($columns = ['*'])
+ * @method static \Anomaly\Streams\Platform\Entry\EntryCollection|static[] get($columns = ['*'])
  * @method static \Pyro\MenusModule\Menu\MenuModel make($attributes=[])
  * @method static \Anomaly\Streams\Platform\Entry\EntryQueryBuilder|\Pyro\MenusModule\Menu\MenuModel newModelQuery()
  * @method static \Anomaly\Streams\Platform\Entry\EntryQueryBuilder|\Pyro\MenusModule\Menu\MenuModel newQuery()
