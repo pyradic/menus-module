@@ -7,7 +7,7 @@ use Anomaly\Streams\Platform\Addon\Extension\ExtensionCollection;
 use Anomaly\Streams\Platform\Asset\Asset;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Anomaly\Streams\Platform\Support\Authorizer;
-use Anomaly\Streams\Platform\View\ViewOverrides;
+use Crvs\Platform\Http\PlatformAjaxResponse;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
@@ -20,7 +20,6 @@ use Pyro\MenusModule\Link\Tree\LinkTreeBuilder;
 use Pyro\MenusModule\Menu\Contract\MenuInterface;
 use Pyro\MenusModule\Menu\Contract\MenuRepositoryInterface;
 use Pyro\MenusModule\Type\LinkTypeExtension;
-use Pyro\Platform\Http\PlatformAjaxResponse;
 
 class AjaxLinksController extends AdminController
 {

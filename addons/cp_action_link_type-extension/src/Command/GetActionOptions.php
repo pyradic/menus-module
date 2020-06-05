@@ -2,13 +2,13 @@
 
 namespace Pyro\CpActionLinkTypeExtension\Command;
 
-use Pyro\Platform\Ui\ControlPanel\Command\TransformControlPanelNavigation;
+use Crvs\Platform\Ui\ControlPanel\Command\TransformControlPanelNavigation;
 
 class GetActionOptions
 {
     public function handle()
     {
-        /** @var \Pyro\Platform\Ui\ControlPanel\Component\NavigationNode $node */
+        /** @var \Crvs\Platform\Ui\ControlPanel\Component\NavigationNode $node */
         $node    = dispatch_now(new TransformControlPanelNavigation());
         $options = [];
         foreach ($node->getChildren() as $nav) {

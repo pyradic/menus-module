@@ -1,11 +1,11 @@
 <?php namespace Pyro\CpActionLinkTypeExtension;
 
+use Crvs\Platform\Ui\ControlPanel\Command\BuildControlPanelStructure;
+use Crvs\Platform\Ui\ControlPanel\Command\TransformControlPanelNavigation;
 use Pyro\CpActionLinkTypeExtension\Command\GetUrl;
 use Pyro\CpActionLinkTypeExtension\Form\CpActionLinkTypeFormBuilder;
 use Pyro\MenusModule\Link\Contract\LinkInterface;
 use Pyro\MenusModule\Type\LinkTypeExtension;
-use Pyro\Platform\Ui\ControlPanel\Command\BuildControlPanelStructure;
-use Pyro\Platform\Ui\ControlPanel\Command\TransformControlPanelNavigation;
 
 class CpActionLinkTypeExtension extends LinkTypeExtension
 {
@@ -30,7 +30,7 @@ class CpActionLinkTypeExtension extends LinkTypeExtension
     public function info(LinkInterface $link)
     {
         $key = $link->getEntry()->key;
-        /** @var \Pyro\Platform\Ui\ControlPanel\Component\NavigationNode $nav */
+        /** @var \Crvs\Platform\Ui\ControlPanel\Component\NavigationNode $nav */
         $nav     = dispatch_now(new TransformControlPanelNavigation());
         $sections   = $nav->getAllDescendants()->sections();
         $buttons = $sections->map->getButtons()->filter(function ($buttons) {

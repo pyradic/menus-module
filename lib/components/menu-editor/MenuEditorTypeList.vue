@@ -68,7 +68,7 @@
     </ul>
 </template>
 <script lang="ts">
-import { Component, component, prop, Styles } from '@pyro/platform';
+import { Component, component, prop, Styles } from '@crvs/platform';
 import { MenuType } from '../../interfaces';
 import { style } from 'typestyle'
 

@@ -2,7 +2,7 @@
 
 namespace Pyro\MenusModule\Http\Controller\Admin;
 
-use Pyro\Platform\Asset\Asset;
+use Crvs\Platform\Asset\Asset;
 
 class AjaxAsset extends Asset
 {

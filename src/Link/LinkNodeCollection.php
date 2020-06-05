@@ -3,7 +3,7 @@
 namespace Pyro\MenusModule\Link;
 
 
-use Pyro\Platform\Ui\TreeNode\NodeCollection;
+use Crvs\Platform\Ui\TreeNode\NodeCollection;
 
 class LinkNodeCollection extends NodeCollection
 {

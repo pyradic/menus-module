@@ -6,7 +6,7 @@
     </py-menu-editor>
 </template>
 <script lang="ts">
-import { Component, component, prop, Styles } from '@pyro/platform';
+import { Component, component, prop, Styles } from '@crvs/platform';
 
 @component()
 export default class MenuEditorView extends Component {

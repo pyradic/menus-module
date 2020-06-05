@@ -2,8 +2,8 @@
 
 namespace Pyro\ModuleLinkTypeExtension\Command;
 
-use Pyro\Platform\Ui\ControlPanel\Command\TransformControlPanelNavigation;
-use Pyro\Platform\Ui\ControlPanel\Component\Button;
+use Crvs\Platform\Ui\ControlPanel\Command\TransformControlPanelNavigation;
+use Crvs\Platform\Ui\ControlPanel\Component\Button;
 
 class GetOptionAction
 {
@@ -22,7 +22,7 @@ class GetOptionAction
     /** @return \Illuminate\Support\Collection */
     protected function getFlattened()
     {
-        /** @var \Pyro\Platform\Ui\ControlPanel\Component\NavigationNode $node */
+        /** @var \Crvs\Platform\Ui\ControlPanel\Component\NavigationNode $node */
         $node = dispatch_now(new TransformControlPanelNavigation());
         $sections = $node->getAllDescendants()->sections()->map->getValue();
         $buttons = $sections->map->getButtons()->flatten(1)->filter(function($button){

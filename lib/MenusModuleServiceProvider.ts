@@ -1,4 +1,4 @@
-import { ServiceProvider } from '@pyro/platform';
+import { ServiceProvider } from '@crvs/platform';
 import MenusVuePlugin from './MenusVuePlugin';
 
 

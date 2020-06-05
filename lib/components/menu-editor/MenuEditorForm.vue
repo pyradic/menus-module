@@ -9,7 +9,7 @@
 
 <script lang="ts">
     import $                              from 'jquery'
-    import { Component, component, prop } from '@pyro/platform';
+    import { Component, component, prop } from '@crvs/platform';
     import { AxiosResponse }              from 'axios'
     import Vue                            from 'vue';
 

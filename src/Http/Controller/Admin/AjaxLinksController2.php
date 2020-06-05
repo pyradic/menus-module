@@ -7,7 +7,8 @@ use Anomaly\Streams\Platform\Addon\Extension\ExtensionCollection;
 use Anomaly\Streams\Platform\Asset\Asset;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Anomaly\Streams\Platform\Support\Authorizer;
-use Illuminate\Contracts\Cache\Repository;
+use Crvs\Platform\Command\ExtractTagsFromHtml;
+use Crvs\Platform\Http\PlatformAjaxResponse;
 use Illuminate\Http\Response;
 use Pyro\MenusModule\Link\Command\ConvertStringToColors;
 use Pyro\MenusModule\Link\Contract\LinkInterface;
@@ -18,8 +19,6 @@ use Pyro\MenusModule\Link\Tree\LinkTreeBuilder;
 use Pyro\MenusModule\Menu\Contract\MenuInterface;
 use Pyro\MenusModule\Menu\Contract\MenuRepositoryInterface;
 use Pyro\MenusModule\Type\LinkTypeExtension;
-use Pyro\Platform\Command\ExtractTagsFromHtml;
-use Pyro\Platform\Http\PlatformAjaxResponse;
 
 class AjaxLinksController2 extends AdminController
 {
@@ -258,7 +257,7 @@ class AjaxLinksController2 extends AdminController
         stop_measure(__METHOD__ . '.render');
         stop_measure(__METHOD__);
 
-        /** @var \Pyro\Platform\Command\ExtractedTags $result */
+        /** @var \Crvs\Platform\Command\ExtractedTags $result */
         $result = dispatch_now(new ExtractTagsFromHtml('script', $form));
         $form = $result->getResultHtml();
         $scripts = $result->getExtractedHtml();

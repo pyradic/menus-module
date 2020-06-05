@@ -5,11 +5,10 @@ use Anomaly\Streams\Platform\Addon\AddonIntegrator;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
 use Anomaly\Streams\Platform\Model\Menus\MenusLinksEntryModel;
 use Anomaly\Streams\Platform\Model\Menus\MenusMenusEntryModel;
-use Anomaly\Streams\Platform\Support\Collection;
 use Anomaly\Streams\Platform\View\Event\TemplateDataIsLoading;
+use Crvs\Platform\Platform;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Str;
-use Pyro\MenusModule\Link\Command\GetLinks;
 use Pyro\MenusModule\Link\Contract\LinkRepositoryInterface;
 use Pyro\MenusModule\Link\LinkModel;
 use Pyro\MenusModule\Link\LinkRepository;
@@ -18,7 +17,6 @@ use Pyro\MenusModule\Menu\Contract\MenuInterface;
 use Pyro\MenusModule\Menu\Contract\MenuRepositoryInterface;
 use Pyro\MenusModule\Menu\MenuModel;
 use Pyro\MenusModule\Menu\MenuRepository;
-use Pyro\Platform\Platform;
 
 /**
  * Class MenusModuleServiceProvider
@@ -90,7 +88,7 @@ class MenusModuleServiceProvider extends AddonServiceProvider
             $cp = $template->get('cp');
             /** @var \Anomaly\Streams\Platform\Addon\Module\Module|\Anomaly\Streams\Platform\Addon\Module\ModulePresenter $module */
             $module = $template->get('module');
-            /** @var \Pyro\Platform\Addon\Theme\Theme $theme */
+            /** @var \Crvs\Platform\Addon\Theme\Theme $theme */
             $theme = $template->get('theme');
             if ($theme->getNamespace() === 'pyro.theme.admin') {
                 $repo = $this->app->make(MenuRepositoryInterface::class);

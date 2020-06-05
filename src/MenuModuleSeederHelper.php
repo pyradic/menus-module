@@ -5,7 +5,8 @@ namespace Pyro\MenusModule;
 use Anomaly\Streams\Platform\Entry\EntryRepository;
 use Anomaly\UsersModule\Role\Contract\RoleInterface;
 use Anomaly\UsersModule\Role\Contract\RoleRepositoryInterface;
-use Illuminate\Http\Request;
+use Crvs\Platform\Database\SeederHelper;
+use Crvs\Platform\Ui\ControlPanel\Command\TransformControlPanelNavigation;
 use Pyro\CpActionLinkTypeExtension\CpActionLinkTypeModel;
 use Pyro\DisabledLinkTypeExtension\DisabledLinkTypeModel;
 use Pyro\DividerLinkTypeExtension\DividerLinkTypeModel;
@@ -14,10 +15,7 @@ use Pyro\LabelLinkTypeExtension\LabelLinkTypeModel;
 use Pyro\MenusModule\Link\Contract\LinkRepositoryInterface;
 use Pyro\MenusModule\Menu\Contract\MenuInterface;
 use Pyro\MenusModule\Menu\Contract\MenuRepositoryInterface;
-use Pyro\ModuleLinkTypeExtension\Command\GetUrl;
 use Pyro\ModuleLinkTypeExtension\ModuleLinkTypeModel;
-use Pyro\Platform\Database\SeederHelper;
-use Pyro\Platform\Ui\ControlPanel\Command\TransformControlPanelNavigation;
 use Pyro\UrlLinkTypeExtension\UrlLinkTypeModel;
 
 class MenuModuleSeederHelper extends SeederHelper
@@ -138,7 +136,7 @@ class MenuModuleSeederHelper extends SeederHelper
 
         $roles = resolve(RoleRepositoryInterface::class)->all();
 
-        /** @var \Pyro\Platform\Ui\ControlPanel\Component\NavigationNode $node */
+        /** @var \Crvs\Platform\Ui\ControlPanel\Component\NavigationNode $node */
         $node    = dispatch_now(new TransformControlPanelNavigation());
         $children = $node->getAllDescendants();
         $node = $children->firstWhere('key','crvs.module.clients::requester.requests');

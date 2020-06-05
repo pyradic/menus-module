@@ -1,5 +1,5 @@
 import Vue                   from 'vue';
-import { VuePlugin }            from '@pyro/platform';
+import { VuePlugin }            from '@crvs/platform';
 import { DisabledMenuItemType } from './DisabledMenuItemType';
 
 export class DisabledLinkTypeExtensionVuePlugin extends VuePlugin {

@@ -1,4 +1,4 @@
-import { component, inject, inject$, prop, slot, TsxComponent, when } from '@pyro/platform';
+import { component, inject, inject$, prop, slot, TsxComponent, when } from '@crvs/platform';
 import 'vue-tsx-support/enable-check';
 import { IconRenderer, Menu, MenuItem }                               from '@pyro/admin-theme';
 

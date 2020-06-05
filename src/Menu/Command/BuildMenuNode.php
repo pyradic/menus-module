@@ -4,11 +4,11 @@ namespace Pyro\MenusModule\Menu\Command;
 
 
 use Anomaly\Streams\Platform\Support\Collection;
+use Crvs\Platform\Ui\TreeNode\NodeInterface;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Pyro\MenusModule\Link\Command\GetLinks;
 use Pyro\MenusModule\Link\LinkCollection;
 use Pyro\MenusModule\Menu\MenuNode;
-use Pyro\Platform\Ui\TreeNode\NodeInterface;
 
 class BuildMenuNode
 {

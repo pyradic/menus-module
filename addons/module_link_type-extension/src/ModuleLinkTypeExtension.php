@@ -1,14 +1,12 @@
 <?php namespace Pyro\ModuleLinkTypeExtension;
 
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
+use Crvs\Platform\Ui\ControlPanel\Command\BuildControlPanelStructure;
 use Pyro\MenusModule\Link\Contract\LinkInterface;
 use Pyro\MenusModule\Type\LinkTypeExtension;
 use Pyro\ModuleLinkTypeExtension\Command\GetActionOptions;
 use Pyro\ModuleLinkTypeExtension\Command\GetUrl;
 use Pyro\ModuleLinkTypeExtension\Form\ModuleLinkTypeFormBuilder;
-use Pyro\Platform\Ui\ControlPanel\Command\BuildControlPanelStructure;
-use Pyro\Platform\Ui\ControlPanel\Command\TransformControlPanelNavigation;
-use Pyro\Platform\Ui\ControlPanel\Component\Button;
 
 class ModuleLinkTypeExtension extends LinkTypeExtension
 {

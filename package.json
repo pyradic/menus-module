@@ -11,7 +11,7 @@
         ]
     },
     "dependencies": {
-        "@pyro/platform": "^1.0.0"
+        "@crvs/platform": "^1.0.0"
     },
     "devDependencies": {
     }

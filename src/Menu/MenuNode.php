@@ -2,10 +2,10 @@
 
 namespace Pyro\MenusModule\Menu;
 
+use Crvs\Platform\Ui\TreeNode\ModelNode;
 use Pyro\MenusModule\Link\Contract\LinkInterface;
 use Pyro\MenusModule\Link\LinkNode;
 use Pyro\MenusModule\Link\LinkNodeCollection;
-use Pyro\Platform\Ui\TreeNode\ModelNode;
 
 /**
  * @method \Pyro\MenusModule\Menu\MenuModel|\Pyro\MenusModule\Menu\Contract\MenuInterface getValue()

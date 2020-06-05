@@ -45,7 +45,7 @@
 
 <script lang="ts">
     import $ from 'jquery'
-    import { Component, component, prop } from '@pyro/platform';
+    import { Component, component, prop } from '@crvs/platform';
     import { Aside as ElAside, Container as ElContainer, Dialog as ElDialog, Main as ElMain, Notification } from 'element-ui'
     import { MenuType } from '../../interfaces';
 
