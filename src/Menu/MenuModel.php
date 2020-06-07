@@ -26,6 +26,8 @@ use Pyro\MenusModule\Menu\Contract\MenuInterface;
  * @property int|null $actions_count
  * @property \Pyro\ActivityLogModule\Activity\ActivityCollection|\Pyro\ActivityLogModule\Activity\ActivityModel[] $activityLogs
  * @property int|null $activity_logs_count
+ * @property \Anomaly\UsersModule\Role\RoleCollection|\Anomaly\UsersModule\Role\RoleModel[] $allowedRoles
+ * @property int|null $allowed_roles_count
  * @property \Anomaly\UsersModule\User\UserModel|null $createdBy
  * @property \Anomaly\UsersModule\User\UserModel|null $created_by
  * @property mixed|null $raw

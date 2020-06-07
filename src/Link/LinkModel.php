@@ -42,18 +42,20 @@ use Pyro\MenusModule\Uri\UriValidator;
  * @property int|null $actions_count
  * @property \Pyro\ActivityLogModule\Activity\ActivityCollection|\Pyro\ActivityLogModule\Activity\ActivityModel[] $activityLogs
  * @property int|null $activity_logs_count
+ * @property \Anomaly\UsersModule\Role\RoleCollection|\Anomaly\UsersModule\Role\RoleModel[] $allowedRoles
+ * @property int|null $allowed_roles_count
  * @property \Pyro\MenusModule\Link\LinkCollection|\Pyro\MenusModule\Link\LinkModel[] $children
  * @property int|null $children_count
  * @property \Anomaly\UsersModule\User\UserModel|null $createdBy
  * @property \Anomaly\UsersModule\User\UserModel|null $created_by
  * @property mixed|null $raw
+ * @property \Pyro\MenusModule\Menu\MenuModel $menu
+ * @property \Pyro\MenusModule\Link\LinkModel|null $parent
  * @property \Anomaly\UsersModule\User\UserModel|null $updatedBy
  * @property \Anomaly\UsersModule\User\UserModel|null $updated_by
  * @property \Anomaly\Streams\Platform\Version\VersionCollection|\Anomaly\Streams\Platform\Version\VersionModel[] $versions
  * @property int|null $versions_count
- * @property \Pyro\MenusModule\Menu\MenuModel $menu
  * @property mixed $entry
- * @property \Pyro\MenusModule\Link\LinkModel $parent
  * @property \Anomaly\UsersModule\Role\RoleModel $allowed_roles
  * @method static \Pyro\MenusModule\Link\LinkCollection|static[] all($columns = ['*'])
  * @method static \Pyro\MenusModule\Link\LinkCollection|static[] get($columns = ['*'])
@@ -75,9 +77,7 @@ use Pyro\MenusModule\Uri\UriValidator;
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereHash($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereIcon($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereMenu($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereMenuId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereParent($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereParentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereQuerystring($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Pyro\MenusModule\Link\LinkModel whereSortOrder($value)
