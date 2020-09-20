@@ -1,5 +1,5 @@
 import { ServiceProvider }                 from '@crvs/platform';
-import { MenuManager }                     from '@pyro/admin-theme';
+import { MenuManager }                     from '@crvs/admin-theme';
 import { LabelLinkTypeExtensionVuePlugin } from './LabelLinkTypeExtensionVuePlugin';
 
 

@@ -12,7 +12,7 @@
     },
     "dependencies": {
         "@crvs/platform": "^1.0.0",
-        "@pyro/admin-theme": "^1.0.0"
+        "@crvs/admin-theme": "^1.0.0"
     },
     "devDependencies": {
     }

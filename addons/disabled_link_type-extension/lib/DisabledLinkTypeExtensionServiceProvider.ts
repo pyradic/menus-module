@@ -1,6 +1,5 @@
-import { ServiceProvider }                 from '@crvs/platform';
-import { MenuManager }                        from '@pyro/admin-theme';
-import { DisabledLinkTypeExtensionVuePlugin } from './DisabledLinkTypeExtensionVuePlugin';
+import { ServiceProvider } from '@crvs/platform';
+import { MenuManager }     from '@crvs/admin-theme';
 
 
 export class DisabledLinkTypeExtensionServiceProvider extends ServiceProvider {

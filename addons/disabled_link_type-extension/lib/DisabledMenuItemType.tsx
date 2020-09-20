@@ -1,6 +1,6 @@
 import { component, inject, inject$, prop, slot, TsxComponent, when } from '@crvs/platform';
 import 'vue-tsx-support/enable-check';
-import { IconRenderer, Menu, MenuItem }                               from '@pyro/admin-theme';
+import { IconRenderer, Menu, MenuItem }                               from '@crvs/admin-theme';
 
 @component({
     block: 'menu-item',
