@@ -68,7 +68,7 @@ class MenusModuleServiceProvider extends AddonServiceProvider
 
     public function register(AddonIntegrator $integrator, AddonCollection $addons, Platform $platform)
     {
-        $names = [ 'divider', 'header', 'label', 'module', 'url','disabled' ];
+        $names = [ 'divider', 'header', 'label', 'module', 'url', 'disabled' ];
         foreach ($names as $name) {
             $addons->push($integrator->register(
                 dirname(__DIR__) . '/addons/' . $name . '_link_type-extension/',
@@ -90,7 +90,7 @@ class MenusModuleServiceProvider extends AddonServiceProvider
             $module = $template->get('module');
             /** @var \Crvs\Platform\Addon\Theme\Theme $theme */
             $theme = $template->get('theme');
-            if ($theme->getNamespace() === 'pyro.theme.admin') {
+            if ($theme->getNamespace() === 'crvs.theme.admin') {
                 $repo = $this->app->make(MenuRepositoryInterface::class);
 
                 $menus = $repo->newQuery()->where('slug', 'like', 'admin_%')->get();
@@ -104,7 +104,7 @@ class MenusModuleServiceProvider extends AddonServiceProvider
                         return $node;
                     });
 
-                $data = $this->app->platform->getData();
+                $data      = $this->app->platform->getData();
                 $nodeArray = $nodes->map->toArray();
                 foreach ($nodeArray->keyBy('slug') as $slug => $menu) {
                     $data->set('menus.' . $slug, $menu);
