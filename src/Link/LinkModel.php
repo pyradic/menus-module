@@ -27,7 +27,7 @@ use Pyro\MenusModule\Uri\UriValidator;
  * @property int|null                                                                                             $updated_by_id
  * @property mixed                                                                                                $deleted_at
  * @property int                                                                                                  $menu_id
- * @property string                                                                                               $type
+ * @property \Pyro\MenusModule\Type\LinkTypeExtension                                                             $type
  * @property int                                                                                                  $entry_id
  * @property string                                                                                               $entry_type
  * @property string                                                                                               $target
