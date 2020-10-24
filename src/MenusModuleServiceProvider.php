@@ -99,14 +99,15 @@ class MenusModuleServiceProvider extends AddonServiceProvider
                     return Str::startsWith($menu->getSlug(), 'admin_');
                 })
                     ->map(function (MenuInterface $menu) {
-                        /** @var \Pyro\MenusModule\Menu\MenuNode $node */
-                        $node = $this->dispatchNow(new BuildMenuNode($menu->toTree()));
-                        return $node;
+                        return \Cache::remember(__CLASS__ . $menu->getSlug() . ':' . auth()->id(), 60 * 60, function () use ($menu) {
+                            /** @var \Pyro\MenusModule\Menu\MenuNode $node */
+                            $node = $this->dispatchNow(new BuildMenuNode($menu->toTree()));
+                            return $node->toArray();
+                        });
                     });
 
-                $data      = $this->app->platform->getData();
-                $nodeArray = $nodes->map->toArray();
-                foreach ($nodeArray->keyBy('slug') as $slug => $menu) {
+                $data = $this->app->platform->getData();
+                foreach ($nodes->keyBy('slug') as $slug => $menu) {
                     $data->set('menus.' . $slug, $menu);
                 }
             }
