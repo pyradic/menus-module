@@ -36,6 +36,8 @@ use Pyro\MenusModule\Uri\UriValidator;
  * @property string|null                                                                                          $icon
  * @property string|null                                                                                          $hash
  * @property string|null                                                                                          $querystring
+ * @property \Pyro\ActivityLogModule\Activity\ActivityCollection|\Pyro\ActivityLogModule\Activity\ActivityModel[] $actions
+ * @property \Pyro\ActivityLogModule\Activity\ActivityCollection|\Pyro\ActivityLogModule\Activity\ActivityModel[] $activityLogs
  * @property \Anomaly\UsersModule\Role\RoleCollection|\Anomaly\UsersModule\Role\RoleModel[]                       $allowedRoles
  * @property \Pyro\MenusModule\Link\LinkCollection|LinkModel[]                                                    $children
  * @property \Anomaly\UsersModule\User\UserModel|null                                                             $createdBy

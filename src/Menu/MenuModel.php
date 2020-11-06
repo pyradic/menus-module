@@ -23,6 +23,8 @@ use Pyro\MenusModule\Menu\Contract\MenuInterface;
  * @property int|null                                                                                                                    $updated_by_id
  * @property mixed                                                                                                                       $deleted_at
  * @property string                                                                                                                      $slug
+ * @property \Pyro\ActivityLogModule\Activity\ActivityCollection|\Pyro\ActivityLogModule\Activity\ActivityModel[]                        $actions
+ * @property \Pyro\ActivityLogModule\Activity\ActivityCollection|\Pyro\ActivityLogModule\Activity\ActivityModel[]                        $activityLogs
  * @property \Anomaly\UsersModule\Role\RoleCollection|\Anomaly\UsersModule\Role\RoleModel[]                                              $allowedRoles
  * @property \Anomaly\UsersModule\User\UserModel|null                                                                                    $createdBy
  * @property \Anomaly\UsersModule\User\UserModel|null                                                                                    $created_by
