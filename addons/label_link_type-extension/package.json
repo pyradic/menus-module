@@ -7,13 +7,17 @@
     "pyro": {
         "srcPath": "lib",
         "entrypoints": [
-            {"path": "index.ts","provider": "LabelLinkTypeExtensionServiceProvider","autoload": true}
-        ]
+            {
+                "path": "index.ts",
+                "provider": "LabelLinkTypeExtensionServiceProvider",
+                "autoload": true
+            }
+        ],
+        "hmr": false
     },
     "dependencies": {
         "@crvs/platform": "^1.0.0",
         "@crvs/admin-theme": "^1.0.0"
     },
-    "devDependencies": {
-    }
+    "devDependencies": {}
 }

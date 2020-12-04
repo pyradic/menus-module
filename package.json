@@ -7,13 +7,16 @@
     "pyro": {
         "srcPath": "lib",
         "entrypoints": [
-            {"path": "index.ts","provider": "MenusModuleServiceProvider"}
-        ]
+            {
+                "path": "index.ts",
+                "provider": "MenusModuleServiceProvider"
+            }
+        ],
+        "hmr": true
     },
     "dependencies": {
         "@crvs/admin-theme": "^1.0.0",
         "@crvs/platform": "^1.0.0"
     },
-    "devDependencies": {
-    }
+    "devDependencies": {}
 }
