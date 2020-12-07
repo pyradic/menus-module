@@ -12,7 +12,7 @@
                 "provider": "MenusModuleServiceProvider"
             }
         ],
-        "hmr": true
+        "hmr": false
     },
     "dependencies": {
         "@crvs/admin-theme": "^1.0.0",

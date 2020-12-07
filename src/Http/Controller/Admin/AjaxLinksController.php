@@ -181,6 +181,22 @@ class AjaxLinksController extends AdminController
         return $this->originalAssets;
     }
 
+    /**
+     * @return array = ['scripts' => '', 'styles' => '']
+     */
+    protected function getFormAssets()
+    {
+        $assets = resolve(Asset::class);
+        $styles = implode(PHP_EOL, $assets->inlines('styles.css'));
+        $styles = \CssMin::minify($styles);
+
+        $scripts = implode(PHP_EOL, $assets->inlines('scripts.js'));
+        $scripts = implode(PHP_EOL, [ '(function(){', 'var module = {};', $scripts, ';', '}.call());' ]);
+        $scripts = \JSMin::minify($scripts);
+
+        return compact('styles', 'scripts');
+    }
+
     protected function renderTree($menu)
     {
         $treeBuilder = resolve(LinkTreeBuilder::class);
@@ -250,22 +266,6 @@ class AjaxLinksController extends AdminController
         });
     }
 
-    /**
-     * @return array = ['scripts' => '', 'styles' => '']
-     */
-    protected function getFormAssets()
-    {
-        $assets = resolve(Asset::class);
-        $styles = implode(PHP_EOL, $assets->inlines('styles.css'));
-        $styles = \CssMin::minify($styles);
-
-        $scripts = implode(PHP_EOL, $assets->inlines('scripts.js'));
-        $scripts = implode(PHP_EOL, [ '(function(){', 'var module = {};', $scripts, ';', '}.call());' ]);
-        $scripts = \JSMin::minify($scripts);
-
-        return compact('styles', 'scripts');
-    }
-
     protected function setPlatformData(string $menuSlug, ExtensionCollection $menuTypes)
     {
         $types = $menuTypes->map(function (LinkTypeExtension $type) {
@@ -279,7 +279,7 @@ class AjaxLinksController extends AdminController
             $color        = (string)$colors[ 'color' ];
             $darkerColor  = (string)$colors[ 'darker' ];
             $lighterColor = (string)$colors[ 'lighter' ];
-            return array_map('trans', compact('name', 'description', 'namespace', 'title', 'slug', 'color', 'darkerColor','lighterColor'));
+            return array_map('trans', compact('name', 'description', 'namespace', 'title', 'slug', 'color', 'darkerColor', 'lighterColor'));
         })->toArray();
 
         $urls = [
